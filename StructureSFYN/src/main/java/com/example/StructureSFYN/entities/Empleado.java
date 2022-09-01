@@ -3,6 +3,8 @@ package com.example.StructureSFYN.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name= "abc")
 public class Empleado implements Serializable{
 
     //Se agrega el @id
@@ -12,7 +14,7 @@ public class Empleado implements Serializable{
     private int id;
 
     //Atributos
-    private String nombreEmpleado;
+    private String nombreEmpleado  = "carlos";
     private String correoEmpleado;
     private enum rolEmpleado{
         Admin, Operario;}
