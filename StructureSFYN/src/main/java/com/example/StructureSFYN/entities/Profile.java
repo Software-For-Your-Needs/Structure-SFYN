@@ -4,19 +4,31 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name= "mprofile")
 public class Profile implements Serializable{
 
     //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
+    private static final Long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
 
     //Atributos
+
+    @Column(name= "image")
     private String image;
+
+    @Column(name= "phone")
     private String phone;
+
+    @Column(name= "empleado")
     private Empleado empleado;
+
+    @Column(name= "creacionAut")
     private Date createdAt;
+
+    @Column(name= "actualizacionAt")
     private Date updatedAt;
 
     // Método constructor

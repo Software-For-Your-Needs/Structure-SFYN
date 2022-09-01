@@ -4,21 +4,29 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name= "abc")
+@Table(name= "empleado")
 public class Empleado implements Serializable{
 
     //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
+    private static final Long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
 
     //Atributos
-    private String nombreEmpleado  = "carlos";
+    @Column(name= "nombreEmpleado")
+    private String nombreEmpleado;
+
+    @Column(name= "correoEmpleado")
     private String correoEmpleado;
+
     private enum rolEmpleado{
         Admin, Operario;}
+
+    @Column(name= "idEmpleado")
     private int idEmpleado;
+
+    @Column(name= "empresaEmpleado")
     private Empresa empresaEmpleado;
 
     // Método constructor
@@ -34,11 +42,11 @@ public class Empleado implements Serializable{
         this.empresaEmpleado = empresaEmpleado;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

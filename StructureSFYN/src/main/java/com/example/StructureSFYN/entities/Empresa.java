@@ -2,20 +2,37 @@ package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+@Entity
+@Table(name= "empresa")
 public class Empresa implements Serializable{
 
     //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
+    private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
     // Atributos
+
+    @Column(name= "nitEmpresa")
     private int nitEmpresa;
+
+    @Column(name= "nombreEmpresa")
     private String nombreEmpresa;
+
+    @Column(name= "tipoEmpresa")
     private String tipoEmpresa;
+
+    @Column(name= "ciudadEmpresa")
     private String ciudadEmpresa;
+
+    @Column(name= "direccionEmpresa")
     private String direccionEmpresa;
+
+    @Column(name= "telefonoEmpresa")
     private String telefonoEmpresa;
+
+    @Column(name= "correoEmpresa")
     private String correoEmpresa;
 
     //Método Constructor
