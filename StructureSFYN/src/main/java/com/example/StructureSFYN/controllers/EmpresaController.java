@@ -28,7 +28,6 @@ public class EmpresaController {
     @PostMapping("/empresas")
     public Empresa crearEmpresa(@RequestBody Empresa empresa){
         return this.service.crearEmpresa(empresa);
-
     }
 
     @DeleteMapping("/empresas/{id}")
@@ -36,4 +35,9 @@ public class EmpresaController {
         this.service.eliminarEmpresa(id);
         return "Se ha eliminado registro satisfactoriamente.";
     }
+    @PutMapping("/empresas/{id}")
+    public Empresa editarEmpresa(@RequestBody Empresa empresa, @PathVariable("id") Long id){
+        return this.service.editarEmpresa(empresa, id);
+    }
+
 }

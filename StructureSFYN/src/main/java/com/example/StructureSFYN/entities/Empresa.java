@@ -12,7 +12,7 @@ public class Empresa {
     private Long id;
     // Atributos
     @Column(name = "nit")
-    private int nitEmpresa;
+    private Long nitEmpresa;
     @Column(name = "nombre")
     private String nombreEmpresa;
     @Column(name = "tipo")
@@ -31,7 +31,7 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(int nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa) {
+    public Empresa(Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa) {
         this.nitEmpresa = nitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.tipoEmpresa = tipoEmpresa;
@@ -42,12 +42,12 @@ public class Empresa {
     }
 
     // Métodos getter and setter
-    public int getNitEmpresa() {
+    public Long getNitEmpresa() {
 
         return nitEmpresa;
     }
 
-    public void setNitEmpresa(int nitEmpresa) {
+    public void setNitEmpresa(Long nitEmpresa) {
 
         this.nitEmpresa = nitEmpresa;
     }
