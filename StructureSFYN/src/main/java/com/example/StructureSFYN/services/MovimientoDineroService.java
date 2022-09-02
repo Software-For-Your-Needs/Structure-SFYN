@@ -1,11 +1,13 @@
 package com.example.StructureSFYN.services;
 
+import com.example.StructureSFYN.entities.Empresa;
 import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -39,6 +41,15 @@ public class MovimientoDineroService {
 
     @Override
     public MovimientoDinero editarMovimientoDinero(MovimientoDinero editarMovimientoDinero){
+        Empresa empresaBD = repository.findById(id).get();
+
+        if (Objects.nonNull(
+                empresa.getNombreEmpresa())
+                && !"".equalsIgnoreCase(
+                empresa.getNombreEmpresa())) {
+            empresaBD.setNombreEmpresa(
+                    empresa.getNombreEmpresa());
+        }
         
     }
 
