@@ -1,10 +1,12 @@
 package services;
 
 import com.example.StructureSFYN.entities.Empleado;
+import com.example.StructureSFYN.entities.Empresa;
 import com.example.StructureSFYN.repositories.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,7 +38,15 @@ public class EmpleadoService {
 
     @Override
     public Empleado editarEmpleado(Empleado editarEmpleado){
-        return this.empleadoRepository.update(editarEmpleado);
+        Empresa empresaBD = repository.findById(id).get();
+
+        if (Objects.nonNull(
+                empresa.getNombreEmpresa())
+                && !"".equalsIgnoreCase(
+                empresa.getNombreEmpresa())) {
+            empresaBD.setNombreEmpresa(
+                    empresa.getNombreEmpresa());
+        }
 
     }
 
