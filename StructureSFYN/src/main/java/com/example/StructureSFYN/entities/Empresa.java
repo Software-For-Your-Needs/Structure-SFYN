@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class Empresa implements Serializable{
 
     //Se agrega el @id
-    private static final long serialVersionUID = 1l;
+    private static final int serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private int id;
     // Atributos
 
     @Column(name= "nitEmpresa")

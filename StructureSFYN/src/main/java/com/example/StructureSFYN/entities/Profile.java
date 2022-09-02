@@ -9,10 +9,10 @@ import java.util.Date;
 public class Profile implements Serializable{
 
     //Se agrega el @id
-    private static final Long serialVersionUID = 1l;
+    private static final int serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private int id;
 
     //Atributos
 
