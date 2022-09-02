@@ -23,6 +23,14 @@ public class EmpresaService {
         return this.repository.findById(id);
     }
 
+    public Empresa crearEmpresa(Empresa nuevaEmpresa){
+        return this.repository.save(nuevaEmpresa);
+    }
+
+    public void eliminarEmpresa(Long id){
+        this.repository.deleteById(id);
+    }
+
 
 
 }

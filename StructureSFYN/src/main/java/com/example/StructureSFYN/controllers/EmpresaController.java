@@ -2,10 +2,7 @@ package com.example.StructureSFYN.controllers;
 
 import com.example.StructureSFYN.entities.Empresa;
 import com.example.StructureSFYN.services.EmpresaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +25,15 @@ public class EmpresaController {
         return this.service.getEmpresa(id);
     }
 
+    @PostMapping("/empresas")
+    public Empresa crearEmpresa(@RequestBody Empresa empresa){
+        return this.service.crearEmpresa(empresa);
+
+    }
+
+    @DeleteMapping("/empresas/{id}")
+    public String eliminarEmpresa(@PathVariable("id") Long id){
+        this.service.eliminarEmpresa(id);
+        return "Se ha eliminado registro satisfactoriamente.";
+    }
 }
