@@ -24,6 +24,7 @@ public class EmpleadoControlador {
 
     @GetMapping("/empleados")
     public List<Empleado> getEmpleado(){
+
         return this.empleadoServicio.getListaEmpleado();
     }
     @GetMapping("/empleado/{id}")
@@ -36,29 +37,9 @@ public class EmpleadoControlador {
       return this.empleadoServicio.crearEmpleado(empleado);
     }
 
-
-    ////////////////////////////
-
-    @GetMapping("/users")
-    public String consultarTodosLosUsuarios(String nombreEmpleado){
-
-       // repositorio.consultarTodosLosUsuarios.list<empleado>
-        return "nombres del servicio";
-        //en el return va el servicio de consultar TODOS los usuarios
-        //por lo general es con un metodo lis list<empleado>
+    @PutMapping("/empleado/{id}")
+    public Empleado editarEmpleado(@PathVariable("id")int id, @RequestBody Empleado empleado){
+        return this.empleadoServicio.editarEmpleado(empleado, id);
     }
-
-    @GetMapping("/users/{id}")
-    public int consultarPorUnSoloUsuario(int id){
-        return  123;
-        //en el return debe de ir el servicio de consultar por un solo usuario
-    }
-
-    @DeleteMapping("/users/{id}")
-    public String eliminarUnUsuario(Empleado empleado){
-        //aca va el repositorio del usuario
-        return "el empleado ha sido eliminado";
-    }
-
 
 }
