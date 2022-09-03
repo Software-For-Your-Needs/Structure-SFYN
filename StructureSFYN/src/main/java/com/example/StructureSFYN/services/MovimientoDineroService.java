@@ -26,6 +26,7 @@ public class MovimientoDineroService {
 
 
     public List<MovimientoDinero> getListaMovimientoDinero(){
+
         return this.movimientoDineroRepository.findAll();
     }
 
