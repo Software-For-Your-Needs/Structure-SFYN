@@ -24,23 +24,23 @@ public class MovimientoDineroService {
 
     //Métodos lógicos
 
-    @Override
+
     public List<MovimientoDinero> getListaMovimientoDinero(){
         return this.movimientoDineroRepository.findAll();
     }
 
-    @Override
-    public Optional<MovimientoDinero> getMovimientoDinero(Long id){
+
+    public Optional<MovimientoDinero> getMovimientoDinero(int id){
         return this.movimientoDineroRepository.findById(id);
     }
 
-    @Override
+
     public MovimientoDinero crearMovimientoDinero(MovimientoDinero nuevoMovimientoDinero){
         return this.movimientoDineroRepository.save(nuevoMovimientoDinero);
     }
 
-    @Override
-    public MovimientoDinero editarMovimientoDinero(MovimientoDinero movimientoDinero, Long id){
+
+    public MovimientoDinero editarMovimientoDinero(MovimientoDinero movimientoDinero, int id){
         MovimientoDinero movimientoDineroBD = movimientoDineroRepository.findById(id).get();
 
         if (Objects.nonNull(
@@ -89,8 +89,8 @@ public class MovimientoDineroService {
                           
     }
 
-    @Override
-    public void eliminarMovimientoDinero(Long id){
+
+    public void eliminarMovimientoDinero(int id){
         this.movimientoDineroRepository.deleteById(id);
     }
 }
