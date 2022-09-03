@@ -2,25 +2,42 @@ package com.example.StructureSFYN.controller;
 
 
 import com.example.StructureSFYN.entities.Empleado;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.StructureSFYN.repository.EmpleadoRepository;
+import com.example.StructureSFYN.services.EmpleadoServicio;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RestController
 @RequestMapping("/sfyn")
 public class EmpleadoControlador {
 
+    @Autowired
+    EmpleadoRepository empleadoRepository;
 
-  /**  El sistema devuelve reponses 200 en la ruta /users
-    con los siguientes verbos:
-    GET ya
-   POST
-    El sistema devuelve responses 200 en la ruta
-     /user/[id] con los siguientes verbos:
-    GET ya
-            PATCH
-    DELETE **/
+    @Autowired
+    EmpleadoServicio empleadoServicio;
+
+    @GetMapping("/empleados")
+    public List<Empleado> getEmpleado(){
+        return this.empleadoServicio.getListaEmpleado();
+    }
+    @GetMapping("/empleado/{id}")
+    public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
+      return this.empleadoServicio.getEmpleado(id);
+    }
+
+    @PostMapping("/empleados")
+    public Empleado crearEmpleado(@RequestBody Empleado empleado){
+      return this.empleadoServicio.crearEmpleado(empleado);
+    }
+
+
+    ////////////////////////////
 
     @GetMapping("/users")
     public String consultarTodosLosUsuarios(String nombreEmpleado){
