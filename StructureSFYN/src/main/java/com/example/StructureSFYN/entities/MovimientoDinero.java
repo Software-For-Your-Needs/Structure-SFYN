@@ -94,7 +94,8 @@ public class MovimientoDinero implements Serializable{
 
         if(calcularGanancia() < 0){
             return "Es deudor";
-        }else{
+        }
+        else{
             return "paz y salvo";
         }
 

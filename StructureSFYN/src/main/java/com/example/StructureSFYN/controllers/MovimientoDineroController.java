@@ -20,16 +20,13 @@ public class MovimientoDineroController {
     @Autowired
     private MovimientoDineroService movimientoDineroService;
 
-    @Autowired
-    private MovimientoDineroRepository movimientoDineroRepository;
-
     public MovimientoDineroController(MovimientoDineroService movimientoDineroService) {
         this.movimientoDineroService = movimientoDineroService;
     }
     @GetMapping("/movimientodinero")
     public List<MovimientoDinero> getMovientoDinero(){
-        //return this.movimientoDineroService.getListaMovimientoDinero();
-        return movimientoDineroRepository.findAll();
+        return this.movimientoDineroService.getListaMovimientoDinero();
+        //return movimientoDineroRepository.findAll();
     }
 
     @GetMapping("/movimientodinero/{id}")
