@@ -2,6 +2,8 @@ package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+@Entity
+@Table(name = "Movimiento Dinero")
 public class MovimientoDinero implements Serializable{
 
     //Se agrega el @id
@@ -10,16 +12,21 @@ public class MovimientoDinero implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     // Atributos
-    private float montoMovimiento;
-    private float montosPositivos;
-    private float montosNegativos;
+    @Column (name = "Monto Movimiento")
+    private Float montoMovimiento;
+    @Column(name = "Montos Positivos")
+    private Float montosPositivos;
+    @Column(name = "Montos Negativos")
+    private Float montosNegativos;
+    @Column (name = "Concepto Movimiento")
     private String conceptoMovimiento;
+    @Column (name = "Usuario Contabilidad")
     private String usuarioContabilidad;
 
     // Método constructor
     public MovimientoDinero (){};
 
-    public MovimientoDinero (float montoMovimiento, float montosPositivos, float montosNegativos, String conceptoMovimiento, String usuarioContabilidad) {
+    public MovimientoDinero (Float montoMovimiento, Float montosPositivos, Float montosNegativos, String conceptoMovimiento, String usuarioContabilidad) {
         this.montoMovimiento = montoMovimiento;
         this.montosPositivos = montosPositivos;
         this.montosNegativos = montosNegativos;
@@ -27,32 +34,32 @@ public class MovimientoDinero implements Serializable{
         this.usuarioContabilidad = usuarioContabilidad;
     }
     // Métodos getter and setter
-    public float getMontoMovimiento() {
+    public Float getMontoMovimiento() {
 
         return montoMovimiento;
     }
 
-    public void setMontoMovimiento(float montoMovimiento) {
+    public void setMontoMovimiento(Float montoMovimiento) {
 
         this.montoMovimiento = montoMovimiento;
     }
 
-    public float getMontosPositivos() {
+    public Float getMontosPositivos() {
 
         return montosPositivos;
     }
 
-    public void setMontosPositivos(float montosPositivos) {
+    public void setMontosPositivos(Float montosPositivos) {
 
         this.montosPositivos = montosPositivos;
     }
 
-    public float getMontosNegativos() {
+    public Float getMontosNegativos() {
 
         return montosNegativos;
     }
 
-    public void setMontosNegativos(float montosNegativos) {
+    public void setMontosNegativos(Float montosNegativos) {
 
         this.montosNegativos = montosNegativos;
     }
@@ -87,7 +94,8 @@ public class MovimientoDinero implements Serializable{
 
         if(calcularGanancia() < 0){
             return "Es deudor";
-        }else{
+        }
+        else{
             return "paz y salvo";
         }
 

@@ -2,6 +2,8 @@ package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+@Entity
+@Table(name = "empresa")
 public class Empresa implements Serializable{
 
     //Se agrega el @id
@@ -10,20 +12,29 @@ public class Empresa implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     // Atributos
-    private int nitEmpresa;
+
+    @Column(name = "Nit ")
+    private Long nitEmpresa;
+    @Column(name = "Nombre ")
     private String nombreEmpresa;
+    @Column(name = "Tipo ")
     private String tipoEmpresa;
+    @Column(name = "Ciudad ")
     private String ciudadEmpresa;
+    @Column(name = "Direccion ")
     private String direccionEmpresa;
+    @Column(name = "Telefono ")
     private String telefonoEmpresa;
+    @Column(name = "Correo ")
     private String correoEmpresa;
+
 
     //Método Constructor
 
     public Empresa() {
     }
 
-    public Empresa(int nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa) {
+    public Empresa(Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa) {
         this.nitEmpresa = nitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.tipoEmpresa = tipoEmpresa;
@@ -34,12 +45,12 @@ public class Empresa implements Serializable{
     }
 
     // Métodos getter and setter
-    public int getNitEmpresa() {
+    public Long getNitEmpresa() {
 
         return nitEmpresa;
     }
 
-    public void setNitEmpresa(int nitEmpresa) {
+    public void setNitEmpresa(Long nitEmpresa) {
 
         this.nitEmpresa = nitEmpresa;
     }
