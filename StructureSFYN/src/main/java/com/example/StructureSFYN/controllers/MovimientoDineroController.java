@@ -5,10 +5,7 @@ import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import com.example.StructureSFYN.services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,4 +31,22 @@ public class MovimientoDineroController {
         return this.movimientoDineroService.getMovimientoDinero(id);
 
     }
+
+    @PostMapping("/movimientodinero")
+    public MovimientoDinero crearMovimientoDinero (@RequestBody MovimientoDinero movimientoDinero){
+        return this.movimientoDineroService.crearMovimientoDinero(movimientoDinero);
+    }
+
+    @DeleteMapping("/movimientodinero/{id}")
+    public String eliminarMovimientoDinero(@PathVariable("id") int id){
+        this.movimientoDineroService.eliminarMovimientoDinero(id);
+        return "Se ha eliminado un registro";
+    }
+
+    @PutMapping("/movimientodinero/{id}")
+    public MovimientoDinero editarMovimientoDinero(@PathVariable("id") int id, @RequestBody MovimientoDinero movimientoDinero){
+        return this.movimientoDineroService.editarMovimientoDinero(movimientoDinero, id);
+
+    }
+
 }
