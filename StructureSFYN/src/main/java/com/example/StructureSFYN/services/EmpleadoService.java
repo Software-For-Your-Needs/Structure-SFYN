@@ -1,4 +1,4 @@
-package services;
+package com.example.StructureSFYN.services;
 
 import com.example.StructureSFYN.entities.Empleado;
 import com.example.StructureSFYN.entities.Empresa;

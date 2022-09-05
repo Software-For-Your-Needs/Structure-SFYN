@@ -1,47 +1,54 @@
+
 package com.example.StructureSFYN.controller;
 
-
 import com.example.StructureSFYN.entities.Empleado;
+import com.example.StructureSFYN.repositories.EmpleadoRepository;
+import com.example.StructureSFYN.services.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RestController
 @RequestMapping("/sfyn")
 public class EmpleadoControlador {
+    @Autowired
+    EmpleadoRepository empleadoRepository;
 
+    @Autowired
+    EmpleadoService empleadoService;
 
-  /**  El sistema devuelve reponses 200 en la ruta /users
-    con los siguientes verbos:
-    GET ya
-   POST
-    El sistema devuelve responses 200 en la ruta
-     /user/[id] con los siguientes verbos:
-    GET ya
-            PATCH
-    DELETE **/
-
-    @GetMapping("/users")
-    public String consultarTodosLosUsuarios(String nombreEmpleado){
-
-       // repositorio.consultarTodosLosUsuarios.list<empleado>
-        return "nombres del servicio";
-        //en el return va el servicio de consultar TODOS los usuarios
-        //por lo general es con un metodo lis list<empleado>
+    public EmpleadoControlador (EmpleadoService empleadoService) {
+        this.empleadoService = empleadoService;
     }
 
-    @GetMapping("/users/{id}")
-    public int consultarPorUnSoloUsuario(int id){
-        return  123;
-        //en el return debe de ir el servicio de consultar por un solo usuario
+    @GetMapping("/empleados")
+    public List<Empleado> getEmpleado(){
+
+        return this.empleadoService.getListaEmpleados();
+    }
+    @GetMapping("/empleados/{id}")
+    public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
+        return this.empleadoService.getEmpleado(id);
     }
 
-    @DeleteMapping("/users/{id}")
-    public String eliminarUnUsuario(Empleado empleado){
-        //aca va el repositorio del usuario
-        return "el empleado ha sido eliminado";
+    @PostMapping("/empleados")
+    public Empleado crearEmpleado(@RequestBody Empleado empleado){
+        return this.empleadoService.crearEmpleado(empleado);
     }
 
+    @PutMapping("/empleados/{id}")
+    public Empleado editarEmpleado(@PathVariable("id")int id, @RequestBody Empleado empleado){
+        return this.empleadoService.editarEmpleado(empleado, id);
+    }
 
+    @DeleteMapping("/empleados/{id}")
+    public String eliminarEmpleado(@PathVariable("id")int id){
+        this.empleadoService.eliminarEmpleado(id);
+        return "Se ha eliminado un registro";
+
+    }
 }
