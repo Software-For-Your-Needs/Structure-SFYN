@@ -1,5 +1,7 @@
 package com.example.StructureSFYN.entities;
 
+import com.example.StructureSFYN.enums.Enum_RoleName;
+import java.util.Date;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,30 +15,45 @@ public class Empleado implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)//Se define la PK llave primaria
     private int id;
 
-    //Atributos
+   //Atributos
     @Column(name = "nombreEmpleado")//Se crea la primera columna de la tabla
     private String nombreEmpleado  = "carlos";
+
     @Column(name = "correoEmpleado")
     private String correoEmpleado;
+    @Column(name = "profile")
+    private Profile profile;
+    @Column(name = "rol")
+    private Enum_RoleName rol;
 
-    //@Column(name = "rolEmpleado")
-    private enum rolEmpleado{
-        Admin, Operario;}
-    @Column(name = "idEmpleado")
-    private Long idEmpleado;
-    @Column(name = "empresaEmpleado")
+    @Column(name = "empresEmpleado")
     private Empresa empresaEmpleado;
+    @Column(name = "transacciones")
+    private List<MovimientoDinero> transacciones;
+    @Column(name = "updateAt")
+    private Date updatedAt;
+    @Column(name = "createdAt")
+    private Date createdAt;
 
-    // Método constructor
+
+    // Método Constructor
+
     public Empleado() {
     }
-    public Empleado(int id, String nombreEmpleado, String correoEmpleado, Long idEmpleado, Empresa empresaEmpleado) {
+
+    public Empleado(int id, String nombreEmpleado, String correoEmpleado, com.example.StructureSFYN.entities.Profile profile, Enum_RoleName rol, com.example.StructureSFYN.entities.Empresa empresaEmpleado, List<MovimientoDinero> transacciones, Date updatedAt, Date createdAt) {
         this.id = id;
         this.nombreEmpleado = nombreEmpleado;
         this.correoEmpleado = correoEmpleado;
-        this.idEmpleado = idEmpleado;
+        this.profile = profile;
+        this.rol = rol;
         this.empresaEmpleado = empresaEmpleado;
+        this.transacciones = transacciones;
+        this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
     }
+
+    //Métodos Getter and Setter
 
     public int getId() {
         return id;
@@ -62,20 +79,52 @@ public class Empleado implements Serializable{
         this.correoEmpleado = correoEmpleado;
     }
 
-    public Long getIdEmpleado() {
-        return idEmpleado;
+    public com.example.StructureSFYN.entities.Profile getProfile() {
+        return profile;
     }
 
-    public void setIdEmpleado(Long idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setProfile(com.example.StructureSFYN.entities.Profile profile) {
+        this.profile = profile;
     }
 
-    public Empresa getEmpresaEmpleado() {
+    public Enum_RoleName getRol() {
+        return rol;
+    }
+
+    public void setRol(Enum_RoleName rol) {
+        this.rol = rol;
+    }
+
+    public com.example.StructureSFYN.entities.Empresa getEmpresaEmpleado() {
         return empresaEmpleado;
     }
 
-    public void setEmpresaEmpleado(Empresa empresaEmpleado) {
+    public void setEmpresaEmpleado(com.example.StructureSFYN.entities.Empresa empresaEmpleado) {
         this.empresaEmpleado = empresaEmpleado;
+    }
+
+    public List<MovimientoDinero> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(List<MovimientoDinero> transacciones) {
+        this.transacciones = transacciones;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
 

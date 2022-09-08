@@ -58,11 +58,11 @@ public class EmpleadoService {
         }
 
         if (Objects.nonNull(
-                empleado.getIdEmpleado())
+                empleado.getId())
                 && !"".equalsIgnoreCase(
-                empleado.getIdEmpleado().toString())) {
-            empleadoBD.setIdEmpleado(
-                    empleado.getIdEmpleado());
+                empleado.getId().toString())) {
+            empleadoBD.setId(
+                    empleado.getId());
         }
 
         if (Objects.nonNull(
@@ -71,6 +71,46 @@ public class EmpleadoService {
                 empleado.getEmpresaEmpleado().toString())) {
             empleadoBD.setEmpresaEmpleado(
                     empleado.getEmpresaEmpleado());
+        }
+
+        if (Objects.nonNull(
+                empleado.getProfile())
+                && !"".equalsIgnoreCase(
+                empleado.getProfile().toString())) {
+            empleadoBD.setProfile(
+                    empleado.getProfile());
+        }
+
+        if (Objects.nonNull(
+                empleado.getRol())
+                && !"".equalsIgnoreCase(
+                empleado.getRol().toString())) {
+            empleadoBD.setRol(
+                    empleado.getRol());
+        }
+
+        if (Objects.nonNull(
+                empleado.getTransacciones())
+                && !"".equalsIgnoreCase(
+                empleado.getTransacciones().toString())) {
+            empleadoBD.setTransacciones(
+                    empleado.getTransacciones());
+        }
+
+        if (Objects.nonNull(
+                empleado.getUpdatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getUpdatedAt().toString())) {
+            empleadoBD.setUpdatedAt(
+                    empleado.getUpdatedAt());
+        }
+
+        if (Objects.nonNull(
+                empleado.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getCreatedAt().toString())) {
+            empleadoBD.setCreatedAt(
+                    empleado.getCreatedAt());
         }
 
         return this.empleadoRepository.save(empleadoBD);
