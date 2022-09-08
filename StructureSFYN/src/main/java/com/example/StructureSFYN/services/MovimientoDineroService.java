@@ -45,51 +45,58 @@ public class MovimientoDineroService {
         MovimientoDinero movimientoDineroBD = movimientoDineroRepository.findById(id).get();
 
         if (Objects.nonNull(
-                movimientoDineroBD.getMontoMovimiento())
+                movimientoDineroBD.getConcepto())
                 && !"".equalsIgnoreCase(
-                movimientoDinero.getMontoMovimiento().toString())) {
-            movimientoDineroBD.setMontoMovimiento(
-                    movimientoDinero.getMontoMovimiento());
+                movimientoDinero.getConcepto())) {
+            movimientoDineroBD.setConcepto(
+                    movimientoDinero.getConcepto());
         }
 
         if (Objects.nonNull(
-                movimientoDineroBD.getMontosPositivos())
+                movimientoDineroBD.getMonto())
                 && !"".equalsIgnoreCase(
-                movimientoDinero.getMontosPositivos().toString())) {
-            movimientoDineroBD.setMontosPositivos(
-                    movimientoDinero.getMontosPositivos());
-
-        }
-
-        if (Objects.nonNull(
-                movimientoDineroBD.getMontosNegativos())
-                && !"".equalsIgnoreCase(
-                movimientoDinero.getMontosNegativos().toString())) {
-            movimientoDineroBD.setMontosNegativos(
-                    movimientoDinero.getMontosNegativos());
+                movimientoDinero.getMonto().toString())) {
+            movimientoDineroBD.setMonto(
+                    movimientoDinero.getMonto());
 
         }
 
         if (Objects.nonNull(
-                movimientoDineroBD.getConceptoMovimiento())
+                movimientoDineroBD.getEmpleado())
                 && !"".equalsIgnoreCase(
-                movimientoDinero.getConceptoMovimiento())) {
-            movimientoDineroBD.setConceptoMovimiento(
-                    movimientoDinero.getConceptoMovimiento());
+                movimientoDinero.getEmpleado().toString())) {
+            movimientoDineroBD.setEmpleado(
+                    movimientoDinero.getEmpleado());
+
         }
 
         if (Objects.nonNull(
-                movimientoDineroBD.getUsuarioContabilidad())
+                movimientoDineroBD.getEmpresa())
                 && !"".equalsIgnoreCase(
-                movimientoDinero.getUsuarioContabilidad())) {
-            movimientoDineroBD.setUsuarioContabilidad(
-                    movimientoDinero.getUsuarioContabilidad());
+                movimientoDinero.getEmpresa().toString())) {
+            movimientoDineroBD.setEmpresa(
+                    movimientoDinero.getEmpresa());
+        }
+
+        if (Objects.nonNull(
+                movimientoDineroBD.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                movimientoDinero.getCreatedAt().toString())) {
+            movimientoDineroBD.setCreatedAt(
+                    movimientoDinero.getCreatedAt());
+        }
+
+        if (Objects.nonNull(
+                movimientoDineroBD.getUpdatedAt())
+                && !"".equalsIgnoreCase(
+                movimientoDinero.getUpdatedAt().toString())) {
+            movimientoDineroBD.setUpdatedAt(
+                    movimientoDinero.getUpdatedAt());
         }
         
         return this.movimientoDineroRepository.save(movimientoDineroBD);
                           
     }
-
 
     public void eliminarMovimientoDinero(int id){
         this.movimientoDineroRepository.deleteById(id);
