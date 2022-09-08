@@ -51,7 +51,7 @@ public class EmpresaService {
             empresaBD.setNombreEmpresa(
                     empresa.getNombreEmpresa());
         }
-        //*************************************
+
         if (Objects.nonNull(
                 empresa.getCiudadEmpresa())
                 && !"".equalsIgnoreCase(
@@ -93,6 +93,36 @@ public class EmpresaService {
                 empresa.getTelefonoEmpresa())) {
             empresaBD.setTelefonoEmpresa(
                     empresa.getTelefonoEmpresa());
+        }
+
+        if (Objects.nonNull(
+                empresa.getTransaciones())
+                && !"".equalsIgnoreCase(
+                empresa.getTransaciones().toString())) {
+            empresaBD.setTransaciones(
+                    empresa.getTransaciones());
+        }
+
+        if (Objects.nonNull(
+                empresa.getEmpleadoList())
+                && !"".equalsIgnoreCase(
+                empresa.getEmpleadoList().toString())) {
+            empresaBD.setEmpleadoList(
+                    empresa.getEmpleadoList());
+        }
+        if (Objects.nonNull(
+                empresa.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                empresa.getCreatedAt().toString())) {
+            empresaBD.setCreatedAt(
+                    empresa.getCreatedAt());
+        }
+        if (Objects.nonNull(
+                empresa.getUpdatedAt())
+                && !"".equalsIgnoreCase(
+                empresa.getUpdatedAt().toString())) {
+            empresaBD.setUpdatedAt(
+                    empresa.getUpdatedAt());
         }
         return empresaRepository.save(empresaBD);
     }
