@@ -17,8 +17,8 @@ public class Empleado implements Serializable {
     private Integer id;
 
     //Atributos
-    @Column(name = "nombreEmpleado")//Se crea la primera columna de la tabla
-    private String nombreEmpleado;
+    @OneToOne
+    private Profile profileEmpleado;
     @Column(name = "correoEmpleado")
     private String correoEmpleado;
 
@@ -40,9 +40,9 @@ public class Empleado implements Serializable {
     public Empleado() {
     }
 
-    public Empleado(Integer id, String nombreEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, MovimientoDinero transaccion, Date upDatedAt, Date createdAt) {
+    public Empleado(Integer id, Profile profileEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, MovimientoDinero transaccion, Date upDatedAt, Date createdAt) {
         this.id = id;
-        this.nombreEmpleado = nombreEmpleado;
+        this.profileEmpleado = profileEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.rolEmpleado = rolEmpleado;
         this.empresaEmpleado = empresaEmpleado;
@@ -59,12 +59,12 @@ public class Empleado implements Serializable {
         this.id = id;
     }
 
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
+    public Profile getProfileEmpleado() {
+        return profileEmpleado;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public void setProfileEmpleado(Profile profileEmpleado) {
+        this.profileEmpleado = profileEmpleado;
     }
 
     public String getCorreoEmpleado() {

@@ -6,13 +6,13 @@ import java.util.Date;
 
 @Entity
 @Table(name = "profile")
-public class Profile implements Serializable{
+public class Profile implements Serializable {
 
     //Se agrega el @id
     private static final Integer serialVersionUID = 432;
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     //Atributos
     @Column(name = "image")
@@ -30,7 +30,8 @@ public class Profile implements Serializable{
     public Profile() {
     }
 
-    public Profile(String image, String phone, String nombre, Date createdAt, Date updatedAt) {
+    public Profile(Integer id, String image, String phone, String nombre, Date createdAt, Date updatedAt) {
+        this.id = id;
         this.image = image;
         this.phone = phone;
         this.nombre = nombre;
@@ -38,8 +39,13 @@ public class Profile implements Serializable{
         this.updatedAt = updatedAt;
     }
 
-    // Métodos getter and setter
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getImage() {
         return image;

@@ -38,6 +38,14 @@ public class ProfileService {
         Profile profileBD = profileRepository.findById(id).get();
 
         if (Objects.nonNull(
+                profileBD.getId())
+                && !"".equalsIgnoreCase(
+                profile.getId().toString())) {
+            profileBD.setId(
+                    profile.getId());
+        }
+
+        if (Objects.nonNull(
                 profileBD.getNombre())
                 && !"".equalsIgnoreCase(
                 profile.getNombre())) {
