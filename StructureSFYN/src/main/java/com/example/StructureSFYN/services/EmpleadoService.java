@@ -58,11 +58,11 @@ public class EmpleadoService {
         }
 
         if (Objects.nonNull(
-                empleado.getIdEmpleado())
+                empleado.getId())
                 && !"".equalsIgnoreCase(
-                empleado.getIdEmpleado().toString())) {
-            empleadoBD.setIdEmpleado(
-                    empleado.getIdEmpleado());
+                empleado.getId().toString())) {
+            empleadoBD.setId(
+                    empleado.getId());
         }
 
         if (Objects.nonNull(
@@ -71,6 +71,34 @@ public class EmpleadoService {
                 empleado.getEmpresaEmpleado().toString())) {
             empleadoBD.setEmpresaEmpleado(
                     empleado.getEmpresaEmpleado());
+        }
+        if (Objects.nonNull(
+                empleado.getRolEmpleado())
+                && !"".equalsIgnoreCase(
+                empleado.getRolEmpleado().toString())) {
+            empleadoBD.setRolEmpleado(
+                    empleado.getRolEmpleado());
+        }
+        if (Objects.nonNull(
+                empleado.getUpDatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getUpDatedAt().toString())) {
+            empleadoBD.setUpDatedAt(
+                    empleado.getUpDatedAt());
+        }
+        if (Objects.nonNull(
+                empleado.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getCreatedAt().toString())) {
+            empleadoBD.setCreatedAt(
+                    empleado.getCreatedAt());
+        }
+        if (Objects.nonNull(
+                empleado.getTransaccion())
+                && !"".equalsIgnoreCase(
+                empleado.getTransaccion().toString())) {
+            empleadoBD.setTransaccion(
+                    empleado.getTransaccion());
         }
 
         return this.empleadoRepository.save(empleadoBD);
