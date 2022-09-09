@@ -16,31 +16,31 @@ public class EmpresaService {
 
     //Metodo constructor
 
-   //@Override
+    //@Override
     public EmpresaService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }
 
     //
-   // @Override
+    // @Override
     public List<Empresa>getListaEmpresa(){
         return this.empresaRepository.findAll();
     }
-   // @Override
-    public Optional<Empresa>getEmpresa(int id){
-        return this.empresaRepository.findById(id);
+    // @Override
+    public Empresa getEmpresa(int id){
+        return this.empresaRepository.findById(id).get();
     }
-   // @Override
+    // @Override
     public Empresa crearEmpresa(Empresa newEmpresa){
         return  this.empresaRepository.save(newEmpresa);
     }
 
     //@Override
     public void eliminarEmpresa(int id){
-      this.empresaRepository.deleteById(id);
+        this.empresaRepository.deleteById(id);
     }
 
-   // @Override
+    // @Override
     public Empresa editarEmpresa(Empresa empresa, int id) {
         Empresa empresaBD = empresaRepository.findById(id).get();
 
@@ -51,7 +51,7 @@ public class EmpresaService {
             empresaBD.setNombreEmpresa(
                     empresa.getNombreEmpresa());
         }
-        //*************************************
+
         if (Objects.nonNull(
                 empresa.getCiudadEmpresa())
                 && !"".equalsIgnoreCase(
@@ -94,7 +94,38 @@ public class EmpresaService {
             empresaBD.setTelefonoEmpresa(
                     empresa.getTelefonoEmpresa());
         }
+
+        if (Objects.nonNull(
+                empresa.getTransacciones())
+                && !"".equalsIgnoreCase(
+                empresa.getTransacciones().toString())) {
+            empresaBD.setTransacciones(
+                    empresa.getTransacciones());
+        }
+
+        if (Objects.nonNull(
+                empresa.getEmpleadoList())
+                && !"".equalsIgnoreCase(
+                empresa.getEmpleadoList().toString())) {
+            empresaBD.setEmpleadoList(
+                    empresa.getEmpleadoList());
+        }
+        if (Objects.nonNull(
+                empresa.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                empresa.getCreatedAt().toString())) {
+            empresaBD.setCreatedAt(
+                    empresa.getCreatedAt());
+        }
+        if (Objects.nonNull(
+                empresa.getUpdatedAt())
+                && !"".equalsIgnoreCase(
+                empresa.getUpdatedAt().toString())) {
+            empresaBD.setUpdatedAt(
+                    empresa.getUpdatedAt());
+        }
         return empresaRepository.save(empresaBD);
     }
+
 
 }

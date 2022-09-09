@@ -18,9 +18,9 @@ public class MovimientoDinero implements Serializable{
     private String concepto;
     @Column(name = "Montos")
     private Float monto;
-    @ManyToOne()
+    @ManyToOne
     private Empleado empleado;
-    @Column
+    @ManyToOne
     private Empresa empresa;
     @Column (name = "createdAt")
     private Date createdAt;

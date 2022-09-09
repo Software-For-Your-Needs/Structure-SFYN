@@ -31,13 +31,12 @@ public class Empresa implements Serializable {
     @Column(name = "Correo")
     private String correoEmpresa;
 
-    @OneToMany(mappedBy = "empresa")
-    @JoinColumn(name = "empresa_id")
+    @OneToMany
     private List<Empleado> empleadoList;
 
-    @OneToMany(mappedBy = "empresa")
-    @JoinColumn(name = "empresa_id")
-    private List<MovimientoDinero> transaciones;
+    @OneToMany
+    @JoinColumn(name = "movimientos")
+    private List<MovimientoDinero> transacciones;
 
     @Column(name = "createdAt")
     private Date createdAt;
@@ -52,7 +51,7 @@ public class Empresa implements Serializable {
     public Empresa() {
     }
 
-    public Empresa(int id, Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa, List<Empleado> empleadoList, List<MovimientoDinero> transaciones, Date createdAt, Date updatedAt) {
+    public Empresa(int id, Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa, List<Empleado> empleadoList, List<MovimientoDinero> transacciones, Date createdAt, Date updatedAt) {
         this.id = id;
         this.nitEmpresa = nitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
@@ -62,7 +61,7 @@ public class Empresa implements Serializable {
         this.telefonoEmpresa = telefonoEmpresa;
         this.correoEmpresa = correoEmpresa;
         this.empleadoList = empleadoList;
-        this.transaciones = transaciones;
+        this.transacciones = transacciones;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -141,12 +140,12 @@ public class Empresa implements Serializable {
         this.empleadoList = empleadoList;
     }
 
-    public List<MovimientoDinero> getTransaciones() {
-        return transaciones;
+    public List<MovimientoDinero> getTransacciones() {
+        return transacciones;
     }
 
-    public void setTransaciones(List<MovimientoDinero> transaciones) {
-        this.transaciones = transaciones;
+    public void setTransacciones(List<MovimientoDinero> transaciones) {
+        this.transacciones = transaciones;
     }
 
     public Date getCreatedAt() {
