@@ -5,6 +5,8 @@ import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.services.EmpresaService;
 import com.example.StructureSFYN.services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +32,14 @@ public class EmpresaController {
     }
 
     @GetMapping("/empresas/{id}")
-    public Empresa getEmpresa(@PathVariable("id") int id) {
-        return this.empresaService.getEmpresa(id);
+    public ResponseEntity<Empresa> getEmpresa(@PathVariable("id") int id) {
+        if(this.empresaService.getEmpresa(id) != null){
+            return new ResponseEntity<Empresa>(this.empresaService.getEmpresa(id), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Empresa>(HttpStatus.NOT_FOUND);
+        }
+        
+        
     }
 
     @PostMapping("/empresas")

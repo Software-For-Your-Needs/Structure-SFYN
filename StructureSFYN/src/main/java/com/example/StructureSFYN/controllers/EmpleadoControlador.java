@@ -1,5 +1,5 @@
 
-package com.example.StructureSFYN.controller;
+package com.example.StructureSFYN.controllers;
 
 import com.example.StructureSFYN.entities.Empleado;
 import com.example.StructureSFYN.entities.Profile;

@@ -49,10 +49,11 @@ public class Empresa implements Serializable {
 
 
     public Empresa() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
-    public Empresa(int id, Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa, List<Empleado> empleadoList, List<MovimientoDinero> transacciones, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public Empresa(Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa, List<Empleado> empleadoList, List<MovimientoDinero> transacciones) {
         this.nitEmpresa = nitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.tipoEmpresa = tipoEmpresa;
@@ -62,8 +63,8 @@ public class Empresa implements Serializable {
         this.correoEmpresa = correoEmpresa;
         this.empleadoList = empleadoList;
         this.transacciones = transacciones;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
     //get set

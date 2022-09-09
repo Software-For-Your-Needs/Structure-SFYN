@@ -29,6 +29,12 @@ public class ProfileController {
     }
     @PostMapping("/profile")
     public Profile crearProfile(@RequestBody Profile profile){
+        System.out.println("Profile Creado");
+        System.out.println(profile.getImage());
+        System.out.println(profile.getNombre());
+        System.out.println(profile.getPhone());
+        System.out.println(profile.getCreatedAt());
+        System.out.println(profile.getUpdatedAt());
         return this.profileService.crearProfile(profile);
     }
     @DeleteMapping("/profile/{id}")

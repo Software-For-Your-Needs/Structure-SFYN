@@ -4,6 +4,7 @@ import com.example.StructureSFYN.entities.Profile;
 import com.example.StructureSFYN.repositories.ProfileRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,61 +36,22 @@ public class ProfileService {
 
 
     public Profile editarProfile(Profile profile, int id) {
-        Profile profileBD = profileRepository.findById(id).get();
+        Profile profileBD = this.profileRepository.findById(id).get();
 
-        if (Objects.nonNull(
-                profileBD.getId())
-                && !"".equalsIgnoreCase(
-                profile.getId().toString())) {
-            profileBD.setId(
-                    profile.getId());
+        if (Objects.nonNull(profileBD.getId())){
+                    profileBD.setNombre(profile.getNombre());
+                    profileBD.setImage(profile.getImage());
+                    profileBD.setPhone(profile.getPhone());
+                    profileBD.setUpdatedAt(new Date());
         }
-
-        if (Objects.nonNull(
-                profileBD.getNombre())
-                && !"".equalsIgnoreCase(
-                profile.getNombre())) {
-            profileBD.setNombre(
-                    profile.getNombre());
-        }
-
-        if (Objects.nonNull(
-                profileBD.getImage())
-                && !"".equalsIgnoreCase(
-                profile.getImage())) {
-            profileBD.setImage(
-                    profile.getImage());
-        }
-
-
-        if (Objects.nonNull(
-                profileBD.getPhone())
-                && !"".equalsIgnoreCase(
-                profile.getPhone())) {
-            profileBD.setPhone(
-                    profile.getPhone());
-        }
-
-        if (Objects.nonNull(
-                profileBD.getCreatedAt())
-                && !"".equalsIgnoreCase(
-                profile.getCreatedAt().toString())) {
-            profileBD.setCreatedAt(
-                    profile.getCreatedAt());
-        }
-
-        if (Objects.nonNull(
-                profileBD.getUpdatedAt())
-                && !"".equalsIgnoreCase(
-                profile.getUpdatedAt().toString())) {
-            profileBD.setUpdatedAt(
-                    profile.getUpdatedAt());
-        }
-
         return this.profileRepository.save(profileBD);
 
     }
     public void eliminarProfile(int id){
-        this.profileRepository.deleteById(id);
+        Profile profileBD = this.profileRepository.findById(id).get();
+        if (Objects.nonNull(profileBD.getId())){
+            this.profileRepository.deleteById(id);
+        }
+        
     }
 }

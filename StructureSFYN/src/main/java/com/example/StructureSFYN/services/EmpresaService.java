@@ -3,11 +3,12 @@ package com.example.StructureSFYN.services;
 import com.example.StructureSFYN.entities.Empresa;
 import com.example.StructureSFYN.repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class EmpresaService {
@@ -28,7 +29,10 @@ public class EmpresaService {
     }
     // @Override
     public Empresa getEmpresa(int id){
-        return this.empresaRepository.findById(id).get();
+        if(!this.empresaRepository.findById(id).isEmpty()){
+            return this.empresaRepository.findById(id).get();
+        }else{return null;}
+        
     }
     // @Override
     public Empresa crearEmpresa(Empresa newEmpresa){
@@ -44,85 +48,17 @@ public class EmpresaService {
     public Empresa editarEmpresa(Empresa empresa, int id) {
         Empresa empresaBD = empresaRepository.findById(id).get();
 
-        if (Objects.nonNull(
-                empresa.getNombreEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getNombreEmpresa())) {
-            empresaBD.setNombreEmpresa(
-                    empresa.getNombreEmpresa());
-        }
-
-        if (Objects.nonNull(
-                empresa.getCiudadEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getCiudadEmpresa())) {
-            empresaBD.setCiudadEmpresa(
-                    empresa.getCiudadEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getDireccionEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getDireccionEmpresa())) {
-            empresaBD.setDireccionEmpresa(
-                    empresa.getDireccionEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getNitEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getNitEmpresa().toString())) {
-            empresaBD.setNitEmpresa(
-                    empresa.getNitEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getCorreoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getCorreoEmpresa())) {
-            empresaBD.setCorreoEmpresa(
-                    empresa.getCorreoEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getTipoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getTipoEmpresa())) {
-            empresaBD.setTipoEmpresa(
-                    empresa.getTipoEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getTelefonoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getTelefonoEmpresa())) {
-            empresaBD.setTelefonoEmpresa(
-                    empresa.getTelefonoEmpresa());
-        }
-
-        if (Objects.nonNull(
-                empresa.getTransacciones())
-                && !"".equalsIgnoreCase(
-                empresa.getTransacciones().toString())) {
-            empresaBD.setTransacciones(
-                    empresa.getTransacciones());
-        }
-
-        if (Objects.nonNull(
-                empresa.getEmpleadoList())
-                && !"".equalsIgnoreCase(
-                empresa.getEmpleadoList().toString())) {
-            empresaBD.setEmpleadoList(
-                    empresa.getEmpleadoList());
-        }
-        if (Objects.nonNull(
-                empresa.getCreatedAt())
-                && !"".equalsIgnoreCase(
-                empresa.getCreatedAt().toString())) {
-            empresaBD.setCreatedAt(
-                    empresa.getCreatedAt());
-        }
-        if (Objects.nonNull(
-                empresa.getUpdatedAt())
-                && !"".equalsIgnoreCase(
-                empresa.getUpdatedAt().toString())) {
-            empresaBD.setUpdatedAt(
-                    empresa.getUpdatedAt());
+        if (Objects.nonNull(empresa.getId())) {
+            empresaBD.setNombreEmpresa(empresa.getNombreEmpresa());
+            empresaBD.setCiudadEmpresa(empresa.getCiudadEmpresa());
+            empresaBD.setDireccionEmpresa(empresa.getDireccionEmpresa());
+            empresaBD.setNitEmpresa(empresa.getNitEmpresa());
+            empresaBD.setCorreoEmpresa(empresa.getCorreoEmpresa());
+            empresaBD.setTipoEmpresa(empresa.getTipoEmpresa());
+            empresaBD.setTelefonoEmpresa(empresa.getTelefonoEmpresa());
+            empresaBD.setTransacciones(empresa.getTransacciones());
+            empresaBD.setEmpleadoList(empresa.getEmpleadoList());
+            empresaBD.setUpdatedAt(new Date());
         }
         return empresaRepository.save(empresaBD);
     }

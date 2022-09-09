@@ -28,15 +28,8 @@ public class Profile implements Serializable {
 
     // Método constructor
     public Profile() {
-    }
-
-    public Profile(Integer id, String image, String phone, String nombre, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.image = image;
-        this.phone = phone;
-        this.nombre = nombre;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public Integer getId() {
