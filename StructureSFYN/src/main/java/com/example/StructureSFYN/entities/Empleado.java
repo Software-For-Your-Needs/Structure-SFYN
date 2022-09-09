@@ -5,6 +5,8 @@ import com.example.StructureSFYN.enums.Enum_RoleName;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Entity//Se ingresa a la entidad Empleado
 @Table(name= "Empleado")//Se asigna el nombre a la tabla de la clase Empleado
@@ -26,9 +28,13 @@ public class Empleado implements Serializable {
     @Column(name = "rolEmpleado")
     private Enum_RoleName rolEmpleado;
 
+    @ManyToOne
+    @JoinColumn(name = "empresa")
     private Empresa empresaEmpleado;
 
-    private MovimientoDinero transaccion;
+    @OneToMany
+    @JoinColumn(name = "transacciones")
+    private List<MovimientoDinero> transacciones;
 
     @Column(name = "updatedAt")
     private Date upDatedAt;
@@ -40,13 +46,13 @@ public class Empleado implements Serializable {
     public Empleado() {
     }
 
-    public Empleado(Integer id, Profile profileEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, MovimientoDinero transaccion, Date upDatedAt, Date createdAt) {
+    public Empleado(Integer id, Profile profileEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, List<MovimientoDinero> transacciones, Date upDatedAt, Date createdAt) {
         this.id = id;
         this.profileEmpleado = profileEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.rolEmpleado = rolEmpleado;
         this.empresaEmpleado = empresaEmpleado;
-        this.transaccion = transaccion;
+        this.transacciones = transacciones;
         this.upDatedAt = upDatedAt;
         this.createdAt = createdAt;
     }
@@ -91,12 +97,12 @@ public class Empleado implements Serializable {
         this.empresaEmpleado = empresaEmpleado;
     }
 
-    public MovimientoDinero getTransaccion() {
-        return transaccion;
+    public List<MovimientoDinero> getTransaccion() {
+        return transacciones;
     }
 
-    public void setTransaccion(MovimientoDinero transaccion) {
-        this.transaccion = transaccion;
+    public void setTransaccion(List<MovimientoDinero> transacciones) {
+        this.transacciones = transacciones;
     }
 
     public Date getUpDatedAt() {

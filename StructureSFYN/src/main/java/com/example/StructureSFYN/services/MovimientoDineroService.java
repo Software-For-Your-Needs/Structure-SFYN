@@ -1,4 +1,5 @@
-import com.example.StructureSFYN.entities.Empresa;
+package com.example.StructureSFYN.services;
+
 import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
