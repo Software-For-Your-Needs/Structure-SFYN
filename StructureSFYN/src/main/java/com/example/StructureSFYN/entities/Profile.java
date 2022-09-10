@@ -8,8 +8,6 @@ import java.util.Date;
 @Table(name = "profile")
 public class Profile implements Serializable {
 
-    //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -25,13 +23,14 @@ public class Profile implements Serializable {
     private Date createdAt;
     @Column(name = "updateAt")
     private Date updatedAt;
-
-    // Método constructor
+    
+    // Constructor
     public Profile() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
-
+    
+    // Getters and Setters
     public Integer getId() {
         return id;
     }

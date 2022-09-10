@@ -1,15 +1,16 @@
 package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "Movimiento Dinero")
+@Table(name = "transaccion")
 public class MovimientoDinero implements Serializable{
 
-    //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -18,30 +19,30 @@ public class MovimientoDinero implements Serializable{
     private String concepto;
     @Column(name = "Montos")
     private Float monto;
-    @ManyToOne
-    private Empleado empleado;
-    @ManyToOne
-    private Empresa empresa;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "empleado_id")
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private Empleado empleado;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "empresa_id")
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private Empresa empresa;
+
     @Column (name = "createdAt")
     private Date createdAt;
     @Column(name = "updatedAt")
     private Date updatedAt;
-    // Método constructor
 
 
+    // Constructor
     public MovimientoDinero() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
-
-    public MovimientoDinero(Integer id, String concepto, Float monto, Empleado empleado, Empresa empresa, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.concepto = concepto;
-        this.monto = monto;
-        this.empleado = empleado;
-        this.empresa = empresa;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
+    
+    // Getters and Setters
     public Integer getId() {
         return id;
     }

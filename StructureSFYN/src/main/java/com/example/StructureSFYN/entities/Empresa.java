@@ -1,42 +1,42 @@
 package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "empresa")
 public class Empresa implements Serializable {
 
-    //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     // Atributos
-
     @Column(name = "Nit")
     private Long nitEmpresa;
+
     @Column(name = "Nombre")
     private String nombreEmpresa;
+
     @Column(name = "Tipo")
     private String tipoEmpresa;
+
     @Column(name = "Ciudad")
     private String ciudadEmpresa;
+
     @Column(name = "Direccion")
     private String direccionEmpresa;
+
     @Column(name = "Telefono")
     private String telefonoEmpresa;
+
     @Column(name = "Correo")
     private String correoEmpresa;
-
-    @OneToMany
-    private List<Empleado> empleadoList;
-
-    @OneToMany
-    @JoinColumn(name = "movimientos")
-    private List<MovimientoDinero> transacciones;
 
     @Column(name = "createdAt")
     private Date createdAt;
@@ -44,31 +44,23 @@ public class Empresa implements Serializable {
     @Column(name = "updateAt")
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("empresa")
+    private Set<Empleado> empleados = new HashSet<>();
 
-    //Método Constructor
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private Set<MovimientoDinero> transacciones = new HashSet<>();;
+
+    
 
 
+    // Constructor
     public Empresa() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 
-    public Empresa(Long nitEmpresa, String nombreEmpresa, String tipoEmpresa, String ciudadEmpresa, String direccionEmpresa, String telefonoEmpresa, String correoEmpresa, List<Empleado> empleadoList, List<MovimientoDinero> transacciones) {
-        this.nitEmpresa = nitEmpresa;
-        this.nombreEmpresa = nombreEmpresa;
-        this.tipoEmpresa = tipoEmpresa;
-        this.ciudadEmpresa = ciudadEmpresa;
-        this.direccionEmpresa = direccionEmpresa;
-        this.telefonoEmpresa = telefonoEmpresa;
-        this.correoEmpresa = correoEmpresa;
-        this.empleadoList = empleadoList;
-        this.transacciones = transacciones;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-    }
-
-    //get set
-
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -133,22 +125,6 @@ public class Empresa implements Serializable {
         this.correoEmpresa = correoEmpresa;
     }
 
-    public List<Empleado> getEmpleadoList() {
-        return empleadoList;
-    }
-
-    public void setEmpleadoList(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
-    }
-
-    public List<MovimientoDinero> getTransacciones() {
-        return transacciones;
-    }
-
-    public void setTransacciones(List<MovimientoDinero> transaciones) {
-        this.transacciones = transaciones;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -164,5 +140,22 @@ public class Empresa implements Serializable {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public Set<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(Set<Empleado> empleados) {
+        this.empleados = empleados;
+    }
+
+    public Set<MovimientoDinero> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(Set<MovimientoDinero> transacciones) {
+        this.transacciones = transacciones;
+    }
+
 }
 

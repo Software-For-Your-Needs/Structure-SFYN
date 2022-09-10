@@ -3,6 +3,8 @@ package com.example.StructureSFYN.controllers;
 import com.example.StructureSFYN.entities.Profile;
 import com.example.StructureSFYN.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,13 @@ public class ProfileController {
         return this.profileService.getListProfiles();
     }
     @GetMapping("/profile/{id}")
-    public Optional<Profile> getProfile(@PathVariable("id") int id){
-        return this.profileService.getProfile(id);
+    public ResponseEntity<Profile> getProfile(@PathVariable("id") int id){
+
+        if(this.profileService.getProfile(id) != null){
+            return new ResponseEntity<Profile>(this.profileService.getProfile(id), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Profile>(HttpStatus.NOT_FOUND);
+        }
     }
     @PostMapping("/profile")
     public Profile crearProfile(@RequestBody Profile profile){

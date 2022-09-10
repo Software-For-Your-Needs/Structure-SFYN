@@ -25,8 +25,12 @@ public class ProfileService {
     }
 
 
-    public Optional<Profile> getProfile(int id) {
-        return this.profileRepository.findById(id);
+    public Profile getProfile(int id) {
+        if(!this.profileRepository.findById(id).isEmpty()){
+            return this.profileRepository.findById(id).get();
+        }else{
+            return null;
+        }
     }
 
 

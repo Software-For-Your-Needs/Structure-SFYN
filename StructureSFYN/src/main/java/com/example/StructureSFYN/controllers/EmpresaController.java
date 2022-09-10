@@ -9,65 +9,62 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/sfyn")
+@RequestMapping("/sfyn/empresas")
 @Service
 public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
     @Autowired
     private MovimientoDineroService movimientoDineroService;
-
-    public EmpresaController(EmpresaService empresaService) {
-        this.empresaService = empresaService;
+    
+    @GetMapping
+    public ResponseEntity<List<Empresa>> getEmpresas() {
+        if(this.empresaService.getListaEmpresa() != null){
+            return new ResponseEntity<List<Empresa>>(this.empresaService.getListaEmpresa(), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<List<Empresa>>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/empresas")
-    public List<Empresa> getEmpresas() {
-        return this.empresaService.getListaEmpresa();
-    }
-
-    @GetMapping("/empresas/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Empresa> getEmpresa(@PathVariable("id") int id) {
         if(this.empresaService.getEmpresa(id) != null){
             return new ResponseEntity<Empresa>(this.empresaService.getEmpresa(id), HttpStatus.OK);
         }else{
             return new ResponseEntity<Empresa>(HttpStatus.NOT_FOUND);
         }
-        
-        
     }
 
-    @PostMapping("/empresas")
+    @PostMapping
     public Empresa crearEmpresa(@RequestBody Empresa empresa) {
         return this.empresaService.crearEmpresa(empresa);
     }
 
-    @DeleteMapping("/empresas/{id}")
+    @DeleteMapping("/{id}")
     public String eliminarEmpresa(@PathVariable("id") int id) {
         this.empresaService.eliminarEmpresa(id);
         return "Se ha eliminado un registro";
     }
 
-    @PutMapping("/empresas/{id}")
+    @PutMapping("/{id}")
     public Empresa editarEmpresa(@PathVariable("id") int id, @RequestBody Empresa empresa) {
         return this.empresaService.editarEmpresa(empresa, id);
     }
 
     // Empresa y movimiento dinero
-    @GetMapping("empresas/{id}/movimientos")
-    public List<MovimientoDinero> getMovimientoEmpresa(@PathVariable("id") int id) {
+    @GetMapping("/{id}/movimientos")
+    public Set<MovimientoDinero> getMovimientoEmpresa(@PathVariable("id") int id) {
         return this.empresaService.getEmpresa(id).getTransacciones();
     }
 
-    @PostMapping("empresas/{id}/movimientos")
+    @PostMapping("/{id}/movimientos")
     public MovimientoDinero crearMovimientoEmpresa(@PathVariable("id") int id, MovimientoDinero newMovimientoDinero) {
         this.movimientoDineroService.crearMovimientoDinero(newMovimientoDinero);
-        List<MovimientoDinero> transacciones = this.empresaService.getEmpresa(id).getTransacciones();
+        Set<MovimientoDinero> transacciones = empresaService.getEmpresa(id).getTransacciones();
         transacciones.add(newMovimientoDinero);
         this.empresaService.getEmpresa(id).setTransacciones(transacciones);
         return newMovimientoDinero;

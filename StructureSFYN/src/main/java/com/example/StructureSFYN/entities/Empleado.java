@@ -2,39 +2,60 @@ package com.example.StructureSFYN.entities;
 
 import com.example.StructureSFYN.enums.Enum_RoleName;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity//Se ingresa a la entidad Empleado
-@Table(name= "Empleado")//Se asigna el nombre a la tabla de la clase Empleado
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@Entity
+@Table(name = "empleado", uniqueConstraints = {@UniqueConstraint(columnNames = {"correoEmpleado"})})
 public class Empleado implements Serializable {
 
-    //Se agrega el @id
-    private static final Integer serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)//Se define la PK llave primaria
     private Integer id;
 
-    //Atributos
-    @OneToOne
-    private Profile profileEmpleado;
-    @Column(name = "correoEmpleado")
+    @NotNull
     private String correoEmpleado;
-
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "rolEmpleado")
     private Enum_RoleName rolEmpleado;
 
-    @ManyToOne
-    @JoinColumn(name = "empresa")
-    private Empresa empresaEmpleado;
+    @OneToOne
+	@JoinColumn(name = "profile_id")
+	private Profile profile;
 
-    @OneToMany
-    @JoinColumn(name = "transacciones")
-    private List<MovimientoDinero> transacciones;
+
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties("empleado")
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    private Set<MovimientoDinero> movimientoDinero = new HashSet<>();
+
 
     @Column(name = "updatedAt")
     private Date upDatedAt;
@@ -42,35 +63,18 @@ public class Empleado implements Serializable {
     @Column(name = "createdAt")
     private Date createdAt;
 
-    // Método constructor
+    // Constructor
     public Empleado() {
+        this.upDatedAt = new Date();
+        this.createdAt = new Date();
     }
-
-    public Empleado(Integer id, Profile profileEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, List<MovimientoDinero> transacciones, Date upDatedAt, Date createdAt) {
-        this.id = id;
-        this.profileEmpleado = profileEmpleado;
-        this.correoEmpleado = correoEmpleado;
-        this.rolEmpleado = rolEmpleado;
-        this.empresaEmpleado = empresaEmpleado;
-        this.transacciones = transacciones;
-        this.upDatedAt = upDatedAt;
-        this.createdAt = createdAt;
-    }
-
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Profile getProfileEmpleado() {
-        return profileEmpleado;
-    }
-
-    public void setProfileEmpleado(Profile profileEmpleado) {
-        this.profileEmpleado = profileEmpleado;
     }
 
     public String getCorreoEmpleado() {
@@ -89,20 +93,28 @@ public class Empleado implements Serializable {
         this.rolEmpleado = rolEmpleado;
     }
 
-    public Empresa getEmpresaEmpleado() {
-        return empresaEmpleado;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setEmpresaEmpleado(Empresa empresaEmpleado) {
-        this.empresaEmpleado = empresaEmpleado;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    public List<MovimientoDinero> getTransaccion() {
-        return transacciones;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setTransaccion(List<MovimientoDinero> transacciones) {
-        this.transacciones = transacciones;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Set<MovimientoDinero> getMovimientoDinero() {
+        return movimientoDinero;
+    }
+
+    public void setMovimientoDinero(Set<MovimientoDinero> movimientoDinero) {
+        this.movimientoDinero = movimientoDinero;
     }
 
     public Date getUpDatedAt() {
@@ -120,4 +132,6 @@ public class Empleado implements Serializable {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+   
 }

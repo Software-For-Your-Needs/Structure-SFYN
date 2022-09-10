@@ -3,7 +3,6 @@ package com.example.StructureSFYN.services;
 import com.example.StructureSFYN.entities.Empresa;
 import com.example.StructureSFYN.repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -24,15 +23,14 @@ public class EmpresaService {
 
     //
     // @Override
-    public List<Empresa>getListaEmpresa(){
-        return this.empresaRepository.findAll();
+    public List<Empresa> getListaEmpresa(){
+        return empresaRepository.findAll();
     }
     // @Override
     public Empresa getEmpresa(int id){
         if(!this.empresaRepository.findById(id).isEmpty()){
             return this.empresaRepository.findById(id).get();
         }else{return null;}
-        
     }
     // @Override
     public Empresa crearEmpresa(Empresa newEmpresa){
@@ -57,7 +55,7 @@ public class EmpresaService {
             empresaBD.setTipoEmpresa(empresa.getTipoEmpresa());
             empresaBD.setTelefonoEmpresa(empresa.getTelefonoEmpresa());
             empresaBD.setTransacciones(empresa.getTransacciones());
-            empresaBD.setEmpleadoList(empresa.getEmpleadoList());
+            empresaBD.setEmpleados(empresa.getEmpleados());
             empresaBD.setUpdatedAt(new Date());
         }
         return empresaRepository.save(empresaBD);

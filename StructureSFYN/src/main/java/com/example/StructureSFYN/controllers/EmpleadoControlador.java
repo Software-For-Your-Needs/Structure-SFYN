@@ -7,6 +7,8 @@ import com.example.StructureSFYN.repositories.EmpleadoRepository;
 import com.example.StructureSFYN.services.EmpleadoService;
 import com.example.StructureSFYN.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,24 +31,33 @@ public class EmpleadoControlador {
     }
 
     @GetMapping("/empleados")
-    public List<Empleado> getEmpleado(){
+    public ResponseEntity<List<Empleado>> getEmpleado(){
 
-        return this.empleadoService.getListaEmpleados();
+        if(this.empleadoService.getListaEmpleados() != null){
+            return new ResponseEntity<List<Empleado>>(this.empleadoService.getListaEmpleados(), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<List<Empleado>>(HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping("/empleados/{id}")
-    public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
-        return this.empleadoService.getEmpleado(id);
+    public ResponseEntity<Empleado> getEmpleado(@PathVariable("id") int id){
+        if(this.empleadoService.getEmpleado(id) != null){
+            return new ResponseEntity<Empleado>(this.empleadoService.getEmpleado(id), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Empleado>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/empleados")
     public Empleado crearEmpleado(@RequestBody Empleado empleado){
-        this.profileService.crearProfile(empleado.getProfileEmpleado());
+        System.out.println("Step1");
+        //this.profileService.crearProfile(empleado.getProfileEmpleado());
         return this.empleadoService.crearEmpleado(empleado);
     }
 
     @PutMapping("/empleados/{id}")
     public Empleado editarEmpleado(@PathVariable("id")int id, @RequestBody Empleado empleado){
-        Profile profile = empleado.getProfileEmpleado();
+        Profile profile = empleado.getProfile();
         this.profileService.editarProfile(profile, profile.getId());
         return this.empleadoService.editarEmpleado(empleado, id);
     }

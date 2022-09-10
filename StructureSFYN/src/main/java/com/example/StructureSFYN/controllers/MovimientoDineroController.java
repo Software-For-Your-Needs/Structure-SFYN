@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sfyn")
+@RequestMapping("/sfyn/movimientodinero")
 //@Service
 public class MovimientoDineroController {
     @Autowired
@@ -20,33 +20,31 @@ public class MovimientoDineroController {
     public MovimientoDineroController(MovimientoDineroService movimientoDineroService) {
         this.movimientoDineroService = movimientoDineroService;
     }
-    @GetMapping("/movimientodinero")
+    @GetMapping
     public List<MovimientoDinero> getMovientoDinero(){
         return this.movimientoDineroService.getListaMovimientoDinero();
         //return movimientoDineroRepository.findAll();
     }
 
-    @GetMapping("/movimientodinero/{id}")
+    @GetMapping("/{id}")
     public Optional<MovimientoDinero> getMovimientoDinero(@PathVariable("id") int id){
         return this.movimientoDineroService.getMovimientoDinero(id);
-
     }
 
-    @PostMapping("/movimientodinero")
+    @PostMapping
     public MovimientoDinero crearMovimientoDinero (@RequestBody MovimientoDinero movimientoDinero){
         return this.movimientoDineroService.crearMovimientoDinero(movimientoDinero);
     }
 
-    @DeleteMapping("/movimientodinero/{id}")
+    @DeleteMapping("/{id}")
     public String eliminarMovimientoDinero(@PathVariable("id") int id){
         this.movimientoDineroService.eliminarMovimientoDinero(id);
         return "Se ha eliminado un registro";
     }
 
-    @PutMapping("/movimientodinero/{id}")
+    @PutMapping("/{id}")
     public MovimientoDinero editarMovimientoDinero(@PathVariable("id") int id, @RequestBody MovimientoDinero movimientoDinero){
         return this.movimientoDineroService.editarMovimientoDinero(movimientoDinero, id);
-
     }
 
 }
