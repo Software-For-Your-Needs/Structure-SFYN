@@ -26,9 +26,8 @@ public class MovimientoDinero implements Serializable{
     private Date createdAt;
     @Column(name = "updatedAt")
     private Date updatedAt;
+
     // Método constructor
-
-
     public MovimientoDinero() {
     }
 

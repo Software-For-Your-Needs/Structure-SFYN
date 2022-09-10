@@ -1,7 +1,9 @@
 package com.example.StructureSFYN.services;
 
 import com.example.StructureSFYN.entities.Empresa;
+import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.repositories.EmpresaRepository;
+import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,16 +13,22 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class EmpresaService {
+public class EmpresaService{
     @Autowired
     private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private MovimientoDineroService movimientoDineroService;
+
+    @Autowired
+    private MovimientoDineroRepository movimientoDineroRepository;
 
     //Metodo constructor
 
     //@Override
-    public EmpresaService(EmpresaRepository empresaRepository) {
-        this.empresaRepository = empresaRepository;
-    }
+    //public EmpresaService(EmpresaRepository empresaRepository) {
+    //    this.empresaRepository = empresaRepository;
+    //}
 
     //
     // @Override
@@ -63,5 +71,30 @@ public class EmpresaService {
         return empresaRepository.save(empresaBD);
     }
 
+    public Empresa editarMovimientoEmpresa(Empresa empresa, int id) {
+        Empresa empresaBD = empresaRepository.findById(id).get();
 
+        if (Objects.nonNull(
+                empresa.getTransacciones())
+                && !"".equalsIgnoreCase(
+                empresa.getTransacciones().toString())) {
+            empresaBD.setTransacciones(
+                    empresa.getTransacciones());
+        }
+        return
+                empresaRepository.save
+                        (empresaBD);
+    }
+
+    public  Empresa editarMovimientoDineroEmpresa(Integer id, MovimientoDinero movimientoDinero){
+        MovimientoDinero movimientoDineroBD = movimientoDineroRepository.findById(movimientoDinero.getId()).get();
+
+         movimientoDineroBD.setConcepto(movimientoDinero.getConcepto());
+         movimientoDineroBD.setMonto(movimientoDinero.getMonto());
+         movimientoDineroBD.setUpdatedAt(new Date());
+
+         this.movimientoDineroRepository.save(movimientoDineroBD);
+
+         return empresaRepository.findById(id).get();
+    }
 }
