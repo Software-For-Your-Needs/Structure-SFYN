@@ -2,7 +2,9 @@ package com.example.StructureSFYN.services;
 
 import com.example.StructureSFYN.entities.Empleado;
 import com.example.StructureSFYN.entities.Empresa;
+import com.example.StructureSFYN.entities.Profile;
 import com.example.StructureSFYN.repositories.EmpleadoRepository;
+import com.example.StructureSFYN.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,6 +16,7 @@ public class EmpleadoService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
+    private ProfileRepository profileRepository;
 
     //Método Constructor
     public EmpleadoService (EmpleadoRepository empleadoRepository) {
@@ -42,11 +45,11 @@ public class EmpleadoService {
         Empleado empleadoBD = empleadoRepository.findById(id).get();
 
         if (Objects.nonNull(
-                empleado.getNombreEmpleado())
+                empleado.getProfileEmpleado())
                 && !"".equalsIgnoreCase(
-                empleado.getNombreEmpleado())) {
-            empleadoBD.setNombreEmpleado(
-                    empleado.getNombreEmpleado());
+                empleado.getProfileEmpleado().toString())) {
+            empleadoBD.setProfileEmpleado(
+                    empleado.getProfileEmpleado());
         }
 
         if (Objects.nonNull(
@@ -58,11 +61,11 @@ public class EmpleadoService {
         }
 
         if (Objects.nonNull(
-                empleado.getIdEmpleado())
+                empleado.getId())
                 && !"".equalsIgnoreCase(
-                empleado.getIdEmpleado().toString())) {
-            empleadoBD.setIdEmpleado(
-                    empleado.getIdEmpleado());
+                empleado.getId().toString())) {
+            empleadoBD.setId(
+                    empleado.getId());
         }
 
         if (Objects.nonNull(
@@ -71,6 +74,34 @@ public class EmpleadoService {
                 empleado.getEmpresaEmpleado().toString())) {
             empleadoBD.setEmpresaEmpleado(
                     empleado.getEmpresaEmpleado());
+        }
+        if (Objects.nonNull(
+                empleado.getRolEmpleado())
+                && !"".equalsIgnoreCase(
+                empleado.getRolEmpleado().toString())) {
+            empleadoBD.setRolEmpleado(
+                    empleado.getRolEmpleado());
+        }
+        if (Objects.nonNull(
+                empleado.getUpDatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getUpDatedAt().toString())) {
+            empleadoBD.setUpDatedAt(
+                    empleado.getUpDatedAt());
+        }
+        if (Objects.nonNull(
+                empleado.getCreatedAt())
+                && !"".equalsIgnoreCase(
+                empleado.getCreatedAt().toString())) {
+            empleadoBD.setCreatedAt(
+                    empleado.getCreatedAt());
+        }
+        if (Objects.nonNull(
+                empleado.getTransaccion())
+                && !"".equalsIgnoreCase(
+                empleado.getTransaccion().toString())) {
+            empleadoBD.setTransaccion(
+                    empleado.getTransaccion());
         }
 
         return this.empleadoRepository.save(empleadoBD);

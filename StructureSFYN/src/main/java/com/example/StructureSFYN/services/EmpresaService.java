@@ -1,100 +1,100 @@
 package com.example.StructureSFYN.services;
 
 import com.example.StructureSFYN.entities.Empresa;
+import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.repositories.EmpresaRepository;
+import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class EmpresaService {
+public class EmpresaService{
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private MovimientoDineroService movimientoDineroService;
+
+    @Autowired
+    private MovimientoDineroRepository movimientoDineroRepository;
+
     //Metodo constructor
 
-   //@Override
-    public EmpresaService(EmpresaRepository empresaRepository) {
-        this.empresaRepository = empresaRepository;
-    }
+    //@Override
+    //public EmpresaService(EmpresaRepository empresaRepository) {
+    //    this.empresaRepository = empresaRepository;
+    //}
 
     //
-   // @Override
+    // @Override
     public List<Empresa>getListaEmpresa(){
         return this.empresaRepository.findAll();
     }
-   // @Override
-    public Optional<Empresa>getEmpresa(int id){
-        return this.empresaRepository.findById(id);
+    // @Override
+    public Empresa getEmpresa(int id){
+        if(!this.empresaRepository.findById(id).isEmpty()){
+            return this.empresaRepository.findById(id).get();
+        }else{return null;}
+        
     }
-   // @Override
+    // @Override
     public Empresa crearEmpresa(Empresa newEmpresa){
         return  this.empresaRepository.save(newEmpresa);
     }
 
     //@Override
     public void eliminarEmpresa(int id){
-      this.empresaRepository.deleteById(id);
+        this.empresaRepository.deleteById(id);
     }
 
-   // @Override
+    // @Override
     public Empresa editarEmpresa(Empresa empresa, int id) {
         Empresa empresaBD = empresaRepository.findById(id).get();
 
-        if (Objects.nonNull(
-                empresa.getNombreEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getNombreEmpresa())) {
-            empresaBD.setNombreEmpresa(
-                    empresa.getNombreEmpresa());
-        }
-        //*************************************
-        if (Objects.nonNull(
-                empresa.getCiudadEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getCiudadEmpresa())) {
-            empresaBD.setCiudadEmpresa(
-                    empresa.getCiudadEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getDireccionEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getDireccionEmpresa())) {
-            empresaBD.setDireccionEmpresa(
-                    empresa.getDireccionEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getNitEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getNitEmpresa().toString())) {
-            empresaBD.setNitEmpresa(
-                    empresa.getNitEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getCorreoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getCorreoEmpresa())) {
-            empresaBD.setCorreoEmpresa(
-                    empresa.getCorreoEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getTipoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getTipoEmpresa())) {
-            empresaBD.setTipoEmpresa(
-                    empresa.getTipoEmpresa());
-        }
-        if (Objects.nonNull(
-                empresa.getTelefonoEmpresa())
-                && !"".equalsIgnoreCase(
-                empresa.getTelefonoEmpresa())) {
-            empresaBD.setTelefonoEmpresa(
-                    empresa.getTelefonoEmpresa());
+        if (Objects.nonNull(empresa.getId())) {
+            empresaBD.setNombreEmpresa(empresa.getNombreEmpresa());
+            empresaBD.setCiudadEmpresa(empresa.getCiudadEmpresa());
+            empresaBD.setDireccionEmpresa(empresa.getDireccionEmpresa());
+            empresaBD.setNitEmpresa(empresa.getNitEmpresa());
+            empresaBD.setCorreoEmpresa(empresa.getCorreoEmpresa());
+            empresaBD.setTipoEmpresa(empresa.getTipoEmpresa());
+            empresaBD.setTelefonoEmpresa(empresa.getTelefonoEmpresa());
+            empresaBD.setTransacciones(empresa.getTransacciones());
+            empresaBD.setEmpleadoList(empresa.getEmpleadoList());
+            empresaBD.setUpdatedAt(new Date());
         }
         return empresaRepository.save(empresaBD);
     }
 
+    public Empresa editarMovimientoEmpresa(Empresa empresa, int id) {
+        Empresa empresaBD = empresaRepository.findById(id).get();
+
+        if (Objects.nonNull(
+                empresa.getTransacciones())
+                && !"".equalsIgnoreCase(
+                empresa.getTransacciones().toString())) {
+            empresaBD.setTransacciones(
+                    empresa.getTransacciones());
+        }
+        return
+                empresaRepository.save
+                        (empresaBD);
+    }
+
+    public  Empresa editarMovimientoDineroEmpresa(Integer id, MovimientoDinero movimientoDinero){
+        MovimientoDinero movimientoDineroBD = movimientoDineroRepository.findById(movimientoDinero.getId()).get();
+
+         movimientoDineroBD.setConcepto(movimientoDinero.getConcepto());
+         movimientoDineroBD.setMonto(movimientoDinero.getMonto());
+         movimientoDineroBD.setUpdatedAt(new Date());
+
+         this.movimientoDineroRepository.save(movimientoDineroBD);
+
+         return empresaRepository.findById(id).get();
+    }
 }

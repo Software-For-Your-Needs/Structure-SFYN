@@ -1,9 +1,11 @@
 
-package com.example.StructureSFYN.controller;
+package com.example.StructureSFYN.controllers;
 
 import com.example.StructureSFYN.entities.Empleado;
+import com.example.StructureSFYN.entities.Profile;
 import com.example.StructureSFYN.repositories.EmpleadoRepository;
 import com.example.StructureSFYN.services.EmpleadoService;
+import com.example.StructureSFYN.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +17,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/sfyn")
 public class EmpleadoControlador {
-    @Autowired
-    EmpleadoRepository empleadoRepository;
+
 
     @Autowired
     EmpleadoService empleadoService;
+    @Autowired
+    ProfileService profileService;
 
     public EmpleadoControlador (EmpleadoService empleadoService) {
         this.empleadoService = empleadoService;
@@ -37,11 +40,14 @@ public class EmpleadoControlador {
 
     @PostMapping("/empleados")
     public Empleado crearEmpleado(@RequestBody Empleado empleado){
+        this.profileService.crearProfile(empleado.getProfileEmpleado());
         return this.empleadoService.crearEmpleado(empleado);
     }
 
     @PutMapping("/empleados/{id}")
     public Empleado editarEmpleado(@PathVariable("id")int id, @RequestBody Empleado empleado){
+        Profile profile = empleado.getProfileEmpleado();
+        this.profileService.editarProfile(profile, profile.getId());
         return this.empleadoService.editarEmpleado(empleado, id);
     }
 

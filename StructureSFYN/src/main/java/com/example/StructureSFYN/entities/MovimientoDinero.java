@@ -2,6 +2,8 @@ package com.example.StructureSFYN.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+
 @Entity
 @Table(name = "Movimiento Dinero")
 public class MovimientoDinero implements Serializable{
@@ -10,96 +12,89 @@ public class MovimientoDinero implements Serializable{
     private static final Integer serialVersionUID = 432;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private Integer id;
     // Atributos
-    @Column (name = "Monto Movimiento")
-    private Float montoMovimiento;
-    @Column(name = "Montos Positivos")
-    private Float montosPositivos;
-    @Column(name = "Montos Negativos")
-    private Float montosNegativos;
-    @Column (name = "Concepto Movimiento")
-    private String conceptoMovimiento;
-    @Column (name = "Usuario Contabilidad")
-    private String usuarioContabilidad;
+    @Column (name = "Concepto")
+    private String concepto;
+    @Column(name = "Montos")
+    private Float monto;
+    @ManyToOne
+    private Empleado empleado;
+    @ManyToOne
+    private Empresa empresa;
+    @Column (name = "createdAt")
+    private Date createdAt;
+    @Column(name = "updatedAt")
+    private Date updatedAt;
 
     // Método constructor
-    public MovimientoDinero (){};
-
-    public MovimientoDinero (Float montoMovimiento, Float montosPositivos, Float montosNegativos, String conceptoMovimiento, String usuarioContabilidad) {
-        this.montoMovimiento = montoMovimiento;
-        this.montosPositivos = montosPositivos;
-        this.montosNegativos = montosNegativos;
-        this.conceptoMovimiento = conceptoMovimiento;
-        this.usuarioContabilidad = usuarioContabilidad;
-    }
-    // Métodos getter and setter
-    public Float getMontoMovimiento() {
-
-        return montoMovimiento;
+    public MovimientoDinero() {
     }
 
-    public void setMontoMovimiento(Float montoMovimiento) {
-
-        this.montoMovimiento = montoMovimiento;
+    public MovimientoDinero(Integer id, String concepto, Float monto, Empleado empleado, Empresa empresa, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.concepto = concepto;
+        this.monto = monto;
+        this.empleado = empleado;
+        this.empresa = empresa;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public Float getMontosPositivos() {
-
-        return montosPositivos;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMontosPositivos(Float montosPositivos) {
-
-        this.montosPositivos = montosPositivos;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Float getMontosNegativos() {
-
-        return montosNegativos;
+    public String getConcepto() {
+        return concepto;
     }
 
-    public void setMontosNegativos(Float montosNegativos) {
-
-        this.montosNegativos = montosNegativos;
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
     }
 
-    public String getConceptoMovimiento() {
-
-        return conceptoMovimiento;
+    public Float getMonto() {
+        return monto;
     }
 
-    public void setConceptoMovimiento(String conceptoMovimiento) {
-
-        this.conceptoMovimiento = conceptoMovimiento;
+    public void setMonto(Float monto) {
+        this.monto = monto;
     }
 
-    public String getUsuarioContabilidad() {
-
-        return usuarioContabilidad;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setUsuarioContabilidad(String usuarioContabilidad) {
-
-        this.usuarioContabilidad = usuarioContabilidad;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
-    public float calcularGanancia(){
-
-        return  this.montosPositivos - this.montosNegativos;
-
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public String consultarEstadoCuenta(){
-
-        if(calcularGanancia() < 0){
-            return "Es deudor";
-        }
-        else{
-            return "paz y salvo";
-        }
-
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
 

@@ -4,35 +4,41 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Profile implements Serializable{
+@Entity
+@Table(name = "profile")
+public class Profile implements Serializable {
 
     //Se agrega el @id
     private static final Integer serialVersionUID = 432;
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     //Atributos
+    @Column(name = "image")
     private String image;
+    @Column(name = "phone")
     private String phone;
-    private Empleado empleado;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "createdAt")
     private Date createdAt;
+    @Column(name = "updateAt")
     private Date updatedAt;
 
     // Método constructor
     public Profile() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
-    public Profile(String image, String phone, Empleado empleado, Date createdAt, Date updatedAt) {
-        this.image = image;
-        this.phone = phone;
-        this.empleado = empleado;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Integer getId() {
+        return id;
     }
 
-    // Métodos getter and setter
-
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getImage() {
         return image;
@@ -50,12 +56,12 @@ public class Profile implements Serializable{
         this.phone = phone;
     }
 
-    public Empleado getUser() {
-        return empleado;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUser(Empleado empleado) {
-        this.empleado = empleado;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Date getCreatedAt() {
