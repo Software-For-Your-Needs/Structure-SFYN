@@ -6,15 +6,19 @@ import com.example.StructureSFYN.entities.Profile;
 import com.example.StructureSFYN.repositories.EmpleadoRepository;
 import com.example.StructureSFYN.services.EmpleadoService;
 import com.example.StructureSFYN.services.ProfileService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RestController
+@Controller
+@Slf4j
 @RequestMapping("/sfyn")
 public class EmpleadoControlador {
 
@@ -24,8 +28,22 @@ public class EmpleadoControlador {
     @Autowired
     ProfileService profileService;
 
+    @Autowired
+    EmpleadoRepository empleadoRepository;
+
     public EmpleadoControlador (EmpleadoService empleadoService) {
         this.empleadoService = empleadoService;
+    }
+
+
+    @GetMapping("/empleados123")
+    public String inicio(Model model){
+
+        var personas = empleadoRepository.findAll();
+
+        model.addAttribute("personas", personas);
+
+        return "empleadoVista";
     }
 
     @GetMapping("/empleados")

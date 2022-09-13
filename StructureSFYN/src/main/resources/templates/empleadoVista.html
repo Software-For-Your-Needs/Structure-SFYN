@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+<h1>Inicio</h1>
+
+<div th:if="${personas != null and !personas.empty}">
+
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">nombre</th>
+        <th scope="col">correo empleado</th>
+        <th scope="col">empresa</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each= "persona : ${personas"}>
+        <th scope="row">1</th>
+        <td th:text= "${persona.correoEmpleado}" >Mark</td>
+        <td >Otto</td>
+        <td >@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</body>
+</html>

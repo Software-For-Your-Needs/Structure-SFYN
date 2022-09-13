@@ -1,13 +1,14 @@
 package com.example.StructureSFYN.entities;
 
 import com.example.StructureSFYN.enums.Enum_RoleName;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
+@Data
 @Entity//Se ingresa a la entidad Empleado
 @Table(name= "Empleado")//Se asigna el nombre a la tabla de la clase Empleado
 public class Empleado implements Serializable {
