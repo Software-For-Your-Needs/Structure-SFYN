@@ -4,13 +4,15 @@ import com.example.StructureSFYN.entities.MovimientoDinero;
 import com.example.StructureSFYN.repositories.MovimientoDineroRepository;
 import com.example.StructureSFYN.services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/sfyn")
 //@Service
 public class MovimientoDineroController {
@@ -21,9 +23,10 @@ public class MovimientoDineroController {
         this.movimientoDineroService = movimientoDineroService;
     }
     @GetMapping("/movimientodinero")
-    public List<MovimientoDinero> getMovientoDinero(){
-        return this.movimientoDineroService.getListaMovimientoDinero();
-        //return movimientoDineroRepository.findAll();
+    public String getMovientoDinero(Model model){
+        List <MovimientoDinero> listaMovimientoDinero = movimientoDineroService.getListaMovimientoDinero();
+        model.addAttribute("movilist", listaMovimientoDinero);
+        return "mostrarMovimientoDinero";
     }
 
     @GetMapping("/movimientodinero/{id}")
