@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,15 +30,27 @@ public class MovimientoDineroController {
         return "mostrarMovimientoDinero";
     }
 
+    @GetMapping("/nuevomovimientodinero")
+    public String agregarMovimientoDinero (Model model){
+        MovimientoDinero nuevoMovimientoDinero = new MovimientoDinero();
+        model.addAttribute("mov",nuevoMovimientoDinero);
+        return "agregarMovimientoDinero";
+    }
     @GetMapping("/movimientodinero/{id}")
     public Optional<MovimientoDinero> getMovimientoDinero(@PathVariable("id") int id){
         return this.movimientoDineroService.getMovimientoDinero(id);
 
     }
 
-    @PostMapping("/movimientodinero")
-    public MovimientoDinero crearMovimientoDinero (@RequestBody MovimientoDinero movimientoDinero){
-        return this.movimientoDineroService.crearMovimientoDinero(movimientoDinero);
+    @PostMapping("/guardarmovimientodinero")
+    public String guardarMovimientoDinero (MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes ){
+        if(movimientoDineroService.saveOrUpdateMovimientoDinero(movimientoDinero) == true){
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");
+            return "redirect:/sfyn/movimientodinero";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "saveError");
+        return "redirect:/sfyn/movimientodinero";
+
     }
 
     @DeleteMapping("/movimientodinero/{id}")

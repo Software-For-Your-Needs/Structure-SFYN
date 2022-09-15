@@ -66,7 +66,6 @@ public class EmpresaController {
 
     @PostMapping("/empresas/{id}/movimientos")
     public MovimientoDinero crearMovimientoEmpresa(@PathVariable("id") int id, MovimientoDinero newMovimientoDinero) {
-        this.movimientoDineroService.crearMovimientoDinero(newMovimientoDinero);
         List<MovimientoDinero> transacciones = this.empresaService.getEmpresa(id).getTransacciones();
         transacciones.add(newMovimientoDinero);
         this.empresaService.getEmpresa(id).setTransacciones(transacciones);

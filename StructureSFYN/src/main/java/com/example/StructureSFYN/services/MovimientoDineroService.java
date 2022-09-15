@@ -36,8 +36,17 @@ public class MovimientoDineroService {
     }
 
 
-    public MovimientoDinero crearMovimientoDinero(MovimientoDinero nuevoMovimientoDinero){
+    /*public MovimientoDinero crearMovimientoDinero(MovimientoDinero nuevoMovimientoDinero){
         return this.movimientoDineroRepository.save(nuevoMovimientoDinero);
+    }*/
+
+    public boolean saveOrUpdateMovimientoDinero(MovimientoDinero movimientoDinero) {
+        MovimientoDinero mov = movimientoDineroRepository.save(movimientoDinero);
+        if (movimientoDineroRepository.findById(mov.getId()) != null) {
+            return true;
+        }
+        return false;
+
     }
 
 
