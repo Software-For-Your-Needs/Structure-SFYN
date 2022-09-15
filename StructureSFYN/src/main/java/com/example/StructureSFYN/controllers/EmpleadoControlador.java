@@ -7,14 +7,16 @@ import com.example.StructureSFYN.repositories.EmpleadoRepository;
 import com.example.StructureSFYN.services.EmpleadoService;
 import com.example.StructureSFYN.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RestController
+@Controller
 @RequestMapping("/sfyn")
 public class EmpleadoControlador {
 
@@ -29,9 +31,10 @@ public class EmpleadoControlador {
     }
 
     @GetMapping("/empleados")
-    public List<Empleado> getEmpleado(){
-
-        return this.empleadoService.getListaEmpleados();
+    public String getEmpleados(Model model){
+        List<Empleado> listaEmpleados = empleadoService.getListaEmpleados();
+        model.addAttribute("empList", listaEmpleados);
+        return "mostrarEmpleados";
     }
     @GetMapping("/empleados/{id}")
     public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
