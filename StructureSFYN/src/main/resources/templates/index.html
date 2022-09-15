@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://tymeleaf.org">//Se agrega el servicio Tymeleaf para construirla pag web
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>//Se agraga el nombre de la pagina
+</head>
+<body>
+<h1>Bienvenido</h1>
+<h2>Esta es la portada de la pagina web de usuario</h2>
+<form action="save" method="post">//Salva y guarda la informacion suministrada
+    <table>//Se crea una tabla
+        <tr>
+            <td><label for="user-name">User name</label></td>
+            <td><input type="text" name="name" ></input></td>
+        </tr>
+        <tr>
+            <td><label for="email">email</label></td>
+            <td><input type="text" name="email" ></input></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="enviar" ></input></td>
+        </tr>

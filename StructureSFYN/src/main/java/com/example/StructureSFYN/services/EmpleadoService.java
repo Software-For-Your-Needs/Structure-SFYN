@@ -35,8 +35,16 @@ public class EmpleadoService {
     }
 
     //@Override
-    public Empleado crearEmpleado(Empleado nuevoEmpleado){
+    /*public Empleado crearEmpleado(Empleado nuevoEmpleado){
         return this.empleadoRepository.save(nuevoEmpleado);
+    }*/
+    public boolean saveOrUpdateEmpleado(Empleado empleado) {
+        Empleado emple = empleadoRepository.save(empleado);
+        if (empleadoRepository.findById(emple.getId()) != null) {
+            return true;
+        }
+        return false;
+
     }
 
     //@Override

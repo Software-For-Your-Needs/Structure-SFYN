@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,15 +37,27 @@ public class EmpleadoControlador {
         model.addAttribute("empList", listaEmpleados);
         return "mostrarEmpleados";
     }
+    @GetMapping("/nuevoempleado")
+    public String agregarEmpleado(Model model){
+        Empleado nuevoEmpleado = new Empleado();
+        model.addAttribute("emple", nuevoEmpleado );
+        return "agregarEmpleado";
+    }
     @GetMapping("/empleados/{id}")
     public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
         return this.empleadoService.getEmpleado(id);
     }
 
-    @PostMapping("/empleados")
-    public Empleado crearEmpleado(@RequestBody Empleado empleado){
-        this.profileService.crearProfile(empleado.getProfileEmpleado());
-        return this.empleadoService.crearEmpleado(empleado);
+    @PostMapping("/guardarempleado")
+    public String guardarEmpleado(Empleado empleado, RedirectAttributes redirectAttributes ){
+        if(empleadoService.saveOrUpdateEmpleado(empleado) == true) {
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");
+            return "redirect:/sfyn/empleados";
+            //this.profileService.crearProfile(empleado.getProfileEmpleado());
+        }
+        //return this.empleadoService.crearEmpleado(empleado);
+        redirectAttributes.addFlashAttribute("mensaje", "saveError");
+        return "redirect:/sfyn/empleados";
     }
 
     @PutMapping("/empleados/{id}")
