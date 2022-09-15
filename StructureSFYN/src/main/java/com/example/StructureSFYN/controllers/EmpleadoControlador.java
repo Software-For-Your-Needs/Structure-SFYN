@@ -39,9 +39,9 @@ public class EmpleadoControlador {
     @GetMapping("/empleados123")
     public String inicio(Model model){
 
-        var personas = empleadoRepository.findAll();
+        List<Empleado> listaEmpleados = empleadoService.getListaEmpleados();
 
-        model.addAttribute("personas", personas);
+        model.addAttribute("empleados", listaEmpleados);
 
         return "empleadoVista";
     }
