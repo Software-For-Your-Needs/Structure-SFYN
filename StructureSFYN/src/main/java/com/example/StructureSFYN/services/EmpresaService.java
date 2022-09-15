@@ -43,8 +43,13 @@ public class EmpresaService{
         
     }
     // @Override
-    public Empresa crearEmpresa(Empresa newEmpresa){
-        return  this.empresaRepository.save(newEmpresa);
+    public boolean saveOrUpdateEmpresa(Empresa empresa) {
+        Empresa emp = empresaRepository.save(empresa);
+        if (empresaRepository.findById(emp.getId()) != null) {
+            return true;
+        }
+        return false;
+
     }
 
     //@Override

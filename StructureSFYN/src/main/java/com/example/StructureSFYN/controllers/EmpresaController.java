@@ -7,16 +7,18 @@ import com.example.StructureSFYN.services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/sfyn")
-@Service
 public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
@@ -28,8 +30,16 @@ public class EmpresaController {
     }
 
     @GetMapping("/empresas")
-    public List<Empresa> getEmpresas() {
-        return this.empresaService.getListaEmpresa();
+    public String getEmpresas(Model model) {
+        List<Empresa> listaEmpresas = empresaService.getListaEmpresa();
+        model.addAttribute("emplist", listaEmpresas);
+        return "mostrarEmpresas";
+    }
+    @GetMapping("/nuevaempresa")
+    public String agregarEmpresa(Model model){
+    Empresa nuevaEmpresa = new Empresa();
+    model.addAttribute("emp", nuevaEmpresa);
+    return "agregarEmpresa";
     }
 
     @GetMapping("/empresas/{id}")
@@ -42,9 +52,14 @@ public class EmpresaController {
         
     }
 
-    @PostMapping("/empresas")
-    public Empresa crearEmpresa(@RequestBody Empresa empresa) {
-        return this.empresaService.crearEmpresa(empresa);
+    @PostMapping("/guardarempresa")
+    public String guardarEmpresa(Empresa empresa, RedirectAttributes redirectAttributes) {
+        if(empresaService.saveOrUpdateEmpresa(empresa) == true){
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");
+            return "redirect:/sfyn/empresas";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "saveError");
+        return "redirect:/sfyn/empresas"; //aqui hace retorno a la lista de empresas pasando por el html
     }
 
     @DeleteMapping("/empresas/{id}")
