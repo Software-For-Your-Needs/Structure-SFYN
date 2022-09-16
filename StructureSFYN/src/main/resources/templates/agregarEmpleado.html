@@ -25,6 +25,23 @@
     <!--Crear formulario para llenar los datos de la empresa y guardarlo en el objeto emp -->
     <form th:action="@{/sfyn/guardarempleado}" th:object="${emple}" method="post">
         <!--Campo para nombre-->
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="nombreEmpleado">Nombre Empleado</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{nombreEmpleado}" class="form-control" id="nombreEmpleado" required="required"></div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for = "telefonoEmpleado">Telefono Empleado</label>
+                <div class="col-md-6">
+                    <input type = "text" th:field = "*{telefonoEmpleado}" class="form-control" id="telefonoEmpleado" required="required"></div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="correoEmpleado">Correo Empleado</label>
@@ -36,14 +53,11 @@
         <!--Campo para direccion-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="rolEmpleado">Rol del Empleado:</label>
+                <label class="col-md-3" for="rolEmpleado">Rol Empleado:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{rolEmpleado}" class="form-control" id="rolEmplado" required="required"></div>
+                    <input type="text" th:field="*{rolEmpleado}" class="form-control" id="rolEmpleado" required="required"></div>
             </div>
         </div>
-
-
-
 
         <!--Boton para enviar todo y ejecutar accion -->
         <div class="row">

@@ -30,8 +30,8 @@ public class EmpleadoService {
     }
 
     //@Override
-    public Optional<Empleado> getEmpleado(int id){
-        return this.empleadoRepository.findById(id);
+    public Empleado getEmpleado(Integer id){
+        return this.empleadoRepository.findById(id).get();
     }
 
     //@Override
@@ -52,13 +52,13 @@ public class EmpleadoService {
 
         Empleado empleadoBD = empleadoRepository.findById(id).get();
 
-        if (Objects.nonNull(
+        /*if (Objects.nonNull(
                 empleado.getProfileEmpleado())
                 && !"".equalsIgnoreCase(
                 empleado.getProfileEmpleado().toString())) {
             empleadoBD.setProfileEmpleado(
                     empleado.getProfileEmpleado());
-        }
+        }*/
 
         if (Objects.nonNull(
                 empleado.getCorreoEmpleado())
@@ -110,6 +110,22 @@ public class EmpleadoService {
                 empleado.getTransaccion().toString())) {
             empleadoBD.setTransaccion(
                     empleado.getTransaccion());
+        }
+
+        if (Objects.nonNull(
+                empleado.getNombreEmpleado())
+                && !"".equalsIgnoreCase(
+                empleado.getNombreEmpleado())) {
+            empleadoBD.setNombreEmpleado(
+                    empleado.getNombreEmpleado());
+        }
+
+        if (Objects.nonNull(
+                empleado.getTelefonoEmpleado())
+                && !"".equalsIgnoreCase(
+                empleado.getTelefonoEmpleado().toString())) {
+            empleadoBD.setTelefonoEmpleado(
+                    empleado.getTelefonoEmpleado());
         }
 
         return this.empleadoRepository.save(empleadoBD);

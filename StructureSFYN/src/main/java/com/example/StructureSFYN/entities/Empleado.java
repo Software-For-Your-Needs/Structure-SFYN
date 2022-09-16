@@ -19,8 +19,8 @@ public class Empleado implements Serializable {
     private Integer id;
 
     //Atributos
-    @OneToOne
-    private Profile profileEmpleado;
+    //@OneToOne
+    //private Profile profileEmpleado;
     @Column(name = "correoEmpleado")
     private String correoEmpleado;
 
@@ -42,19 +42,28 @@ public class Empleado implements Serializable {
     @Column(name = "createdAt")
     private Date createdAt;
 
+    @Column(name = "nombreEmpleado")
+    private String nombreEmpleado;
+
+    @Column(name = "telefonoEmpleado")
+    private Integer telefonoEmpleado;
+
     // Método constructor
     public Empleado() {
     }
 
-    public Empleado(Integer id, Profile profileEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, List<MovimientoDinero> transacciones, Date upDatedAt, Date createdAt) {
+    public Empleado(Integer id, String nombreEmpleado, Integer telefonoEmpleado, String correoEmpleado, Enum_RoleName rolEmpleado, Empresa empresaEmpleado, List<MovimientoDinero> transacciones, Date upDatedAt, Date createdAt) {
         this.id = id;
-        this.profileEmpleado = profileEmpleado;
+        //this.profileEmpleado = profileEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.rolEmpleado = rolEmpleado;
         this.empresaEmpleado = empresaEmpleado;
         this.transacciones = transacciones;
         this.upDatedAt = upDatedAt;
         this.createdAt = createdAt;
+        this.nombreEmpleado = nombreEmpleado;
+        this.telefonoEmpleado = telefonoEmpleado;
+
     }
 
     public Integer getId() {
@@ -65,13 +74,13 @@ public class Empleado implements Serializable {
         this.id = id;
     }
 
-    public Profile getProfileEmpleado() {
+    /*public Profile getProfileEmpleado() {
         return profileEmpleado;
     }
 
     public void setProfileEmpleado(Profile profileEmpleado) {
         this.profileEmpleado = profileEmpleado;
-    }
+    }*/
 
     public String getCorreoEmpleado() {
         return correoEmpleado;
@@ -119,5 +128,21 @@ public class Empleado implements Serializable {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public Integer getTelefonoEmpleado() {
+        return telefonoEmpleado;
+    }
+
+    public void setTelefonoEmpleado(Integer telefonoEmpleado) {
+        this.telefonoEmpleado = telefonoEmpleado;
     }
 }

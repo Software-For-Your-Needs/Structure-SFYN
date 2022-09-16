@@ -28,6 +28,8 @@
     <tr>
 
     <th>ID</th>
+    <th>Nombre Empleado</th>
+    <th>Teléfono Empleado</th>
     <th>Correo Empleado</th>
     <th>Rol Empleado</th>
         <!--<th>Empresa</th>-->
@@ -43,6 +45,8 @@
 
     <br> <tr th:each="empleado: ${empList}">
     <td th:text="${empleado.id}"></td>
+    <td th:text="${empleado.nombreEmpleado}"></td>
+    <td th:text="${empleado.telefonoEmpleado}"></td>
     <td th:text="${empleado.correoEmpleado}"></td>
     <td th:text="${empleado.rolEmpleado}"></td>
     <td th:text="${empleado.upDatedAt}"></td>
@@ -50,8 +54,8 @@
 
     <!--boton para editar y eliminar las empresas-->
 
-    <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarEmpleado/{id}(id=${empleado.id})}">Editar</a></button></td>
-    <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarEmpleado/{id}(id=${empleado.id})}">Eliminar</a></button></td>
+    <td><button type="button" class="btn btn-warning"><a th:href="@{/sfyn/editarempleado/{id}(id=${empleado.id})}">Editar</a></button></td>
+    <td><button type="button" class="btn btn-danger"><a th:href="@{/sfyn/eliminarempleado/{id}(id=${empleado.id})}">Eliminar</a></button></td>
 
 </tr>
 
@@ -60,7 +64,7 @@
     <!-- vamos a crear un boton que siva para agregar nuevas empresas-->
 
 
-    <button type="button" class="btn btn-info"><a th:href="@{/sfyn/nuevoempleado}">Agregar Nuevo Empleado</a></button>
+    <button type="button" class="btn btn-info"><a th:href="@{/sfyn/nuevoempleado}">Agregar Empleado</a></button>
     <br><br>
 </div>
 <div class="text-center">

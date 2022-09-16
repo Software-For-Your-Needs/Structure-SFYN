@@ -27,30 +27,34 @@ public class EmpleadoControlador {
     @Autowired
     ProfileService profileService;
 
-    public EmpleadoControlador (EmpleadoService empleadoService) {
+    public EmpleadoControlador(EmpleadoService empleadoService) {
+
         this.empleadoService = empleadoService;
     }
 
     @GetMapping("/empleados")
-    public String getEmpleados(Model model){
+    public String getEmpleados(Model model) {
         List<Empleado> listaEmpleados = empleadoService.getListaEmpleados();
         model.addAttribute("empList", listaEmpleados);
         return "mostrarEmpleados";
     }
+
     @GetMapping("/nuevoempleado")
-    public String agregarEmpleado(Model model){
+    public String agregarEmpleado(Model model) {
         Empleado nuevoEmpleado = new Empleado();
-        model.addAttribute("emple", nuevoEmpleado );
+        model.addAttribute("emple", nuevoEmpleado);
         return "agregarEmpleado";
     }
+
     @GetMapping("/empleados/{id}")
-    public Optional<Empleado> getEmpleado(@PathVariable("id") int id){
+    public Empleado getEmpleado(@PathVariable("id") int id) {
+
         return this.empleadoService.getEmpleado(id);
     }
 
     @PostMapping("/guardarempleado")
-    public String guardarEmpleado(Empleado empleado, RedirectAttributes redirectAttributes ){
-        if(empleadoService.saveOrUpdateEmpleado(empleado) == true) {
+    public String guardarEmpleado(Empleado empleado, RedirectAttributes redirectAttributes) {
+        if (empleadoService.saveOrUpdateEmpleado(empleado) == true) {
             redirectAttributes.addFlashAttribute("mensaje", "saveOK");
             return "redirect:/sfyn/empleados";
             //this.profileService.crearProfile(empleado.getProfileEmpleado());
@@ -60,17 +64,39 @@ public class EmpleadoControlador {
         return "redirect:/sfyn/empleados";
     }
 
-    @PutMapping("/empleados/{id}")
+   /* @PutMapping("/empleados/{id}")
     public Empleado editarEmpleado(@PathVariable("id")int id, @RequestBody Empleado empleado){
         Profile profile = empleado.getProfileEmpleado();
         this.profileService.editarProfile(profile, profile.getId());
         return this.empleadoService.editarEmpleado(empleado, id);
-    }
+    }*/
 
     @DeleteMapping("/empleados/{id}")
-    public String eliminarEmpleado(@PathVariable("id")int id){
+    public String eliminarEmpleado(@PathVariable("id") int id) {
         this.empleadoService.eliminarEmpleado(id);
         return "Se ha eliminado un registro";
+    }
 
+    @GetMapping("/editarempleado/{id}")
+    public String editarEmpleado(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje) {
+        Empleado emple = empleadoService.getEmpleado(id);
+        //Creamos un atributo para el modelo, que se llame igualmente emp y es el que ira al html para llenar o alimentar campos
+        //
+        model.addAttribute("emple", emple);
+        model.addAttribute("mensaje", mensaje);
+        return "editarEmpleado";
+    }
+
+    //aqui se activa el boton actualizar
+
+    @PostMapping("/actualizarempleado")
+    public String updateEmpleado(@ModelAttribute("emple") Empleado emple, RedirectAttributes redirectAttributes) {
+        if (empleadoService.saveOrUpdateEmpleado(emple) == true) {
+            redirectAttributes.addFlashAttribute("mensaje", "updateOK");
+
+            return "redirect:/sfyn/empleados";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
+        return "redirect:/sfyn/editarempleado";
     }
 }
