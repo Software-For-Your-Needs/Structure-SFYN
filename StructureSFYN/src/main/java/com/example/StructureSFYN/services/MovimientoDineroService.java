@@ -131,6 +131,13 @@ public class MovimientoDineroService {
         return movimientoDineroRepository
     }*/
 
+    public boolean deleteMovimientoDinero(Integer id){
+        movimientoDineroRepository.deleteById(id);  //Eliminar
 
+        if (movimientoDineroRepository.findById(id)!=null){  //Verificacion del servicio eliminacion
+            return true;
+        }
+        return false;
+    }
 
 }

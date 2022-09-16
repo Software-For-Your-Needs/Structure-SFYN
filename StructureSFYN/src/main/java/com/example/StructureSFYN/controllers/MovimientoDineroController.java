@@ -95,4 +95,14 @@ public class MovimientoDineroController {
         return "redirect:/sfyn/editarmovimientodinero";
     }
 
+    @GetMapping("/eliminarmovimientodinero/{id}")
+    public String eliminarMovimientoDinero(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        if (movimientoDineroService.deleteMovimientoDinero(id)==true){
+            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
+            return "redirect:/sfyn/movimientodinero";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/sfyn/movimientodinero";
+    }
+
 }
