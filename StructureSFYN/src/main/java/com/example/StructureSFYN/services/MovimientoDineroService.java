@@ -31,8 +31,8 @@ public class MovimientoDineroService {
     }
 
 
-    public Optional<MovimientoDinero> getMovimientoDinero(int id){
-        return this.movimientoDineroRepository.findById(id);
+    public MovimientoDinero getMovimientoDinero(int id){
+        return this.movimientoDineroRepository.findById(id).get();
     }
 
 
@@ -59,6 +59,22 @@ public class MovimientoDineroService {
                 movimientoDinero.getConcepto())) {
             movimientoDineroBD.setConcepto(
                     movimientoDinero.getConcepto());
+        }
+
+        if (Objects.nonNull(
+                movimientoDineroBD.getIdEmpleado())
+                && !"".equalsIgnoreCase(
+                movimientoDinero.getIdEmpleado().toString())) {
+            movimientoDineroBD.setIdEmpleado(
+                    movimientoDinero.getIdEmpleado());
+        }
+
+        if (Objects.nonNull(
+                movimientoDineroBD.getIdEmpresa())
+                && !"".equalsIgnoreCase(
+                movimientoDinero.getIdEmpresa().toString())) {
+            movimientoDineroBD.setIdEmpresa(
+                    movimientoDinero.getIdEmpresa());
         }
 
         if (Objects.nonNull(

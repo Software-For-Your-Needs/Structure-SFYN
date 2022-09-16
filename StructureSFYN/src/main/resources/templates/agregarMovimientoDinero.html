@@ -28,6 +28,22 @@
         <!--Campo para nombre-->
         <div class="row">
             <div class="form-group col-md-12">
+                <label class="col-md-3" for="idEmpresa">ID Empresa</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{idEmpresa}" class="form-control" id="idEmpresa" required="required"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="idEmpleado">ID Empleado</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{idEmpleado}" class="form-control" id="idEmpleado" required="required"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
                 <label class="col-md-3" for="concepto">Concepto Movimiento</label>
                 <div class="col-md-6">
                     <input type="text" th:field="*{concepto}" class="form-control" id="concepto" required="required"></div>

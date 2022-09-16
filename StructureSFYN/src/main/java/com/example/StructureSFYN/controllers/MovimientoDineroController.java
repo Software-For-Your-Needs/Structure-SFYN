@@ -36,8 +36,15 @@ public class MovimientoDineroController {
         model.addAttribute("mov",nuevoMovimientoDinero);
         return "agregarMovimientoDinero";
     }
+
+    /*@GetMapping("/empleado/nuevomovimientodinero")
+    public String agregarMovimientoDinero (Model model){
+        MovimientoDinero nuevoMovimientoDinero = new MovimientoDinero();
+        model.addAttribute("mov",nuevoMovimientoDinero);
+        return "agregarMovimientoDinero";
+    }*/
     @GetMapping("/movimientodinero/{id}")
-    public Optional<MovimientoDinero> getMovimientoDinero(@PathVariable("id") int id){
+    public MovimientoDinero getMovimientoDinero(@PathVariable("id") int id){
         return this.movimientoDineroService.getMovimientoDinero(id);
 
     }
@@ -63,6 +70,29 @@ public class MovimientoDineroController {
     public MovimientoDinero editarMovimientoDinero(@PathVariable("id") int id, @RequestBody MovimientoDinero movimientoDinero){
         return this.movimientoDineroService.editarMovimientoDinero(movimientoDinero, id);
 
+    }
+
+    @GetMapping("/editarmovimientodinero/{id}")
+    public String editarMovimientoDinero(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
+        MovimientoDinero mov= movimientoDineroService.getMovimientoDinero(id);
+        //Creamos un atributo para el modelo, que se llame igualmente emp y es el que ira al html para llenar o alimentar campos
+        //
+        model.addAttribute("mov",mov);
+        model.addAttribute("mensaje", mensaje);
+        return "editarMovimientoDinero";
+    }
+
+    //aqui se activa el boton actualizar
+
+    @PostMapping("/actualizarmovimientodinero")
+    public String updateMovientoDinero (@ModelAttribute("mov") MovimientoDinero mov, RedirectAttributes redirectAttributes) {
+        if(movimientoDineroService.saveOrUpdateMovimientoDinero(mov)==true){
+            redirectAttributes.addFlashAttribute("mensaje", "updateOK");
+
+            return "redirect:/sfyn/movimientodinero";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
+        return "redirect:/sfyn/editarmovimientodinero";
     }
 
 }

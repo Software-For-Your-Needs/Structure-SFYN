@@ -18,8 +18,15 @@ public class MovimientoDinero implements Serializable{
     private String concepto;
     @Column(name = "Montos")
     private Float monto;
+
+    @Column(name = "idEmpresa" )
+    private  Integer idEmpresa;
     @ManyToOne
     private Empleado empleado;
+
+    @Column(name = "idEmpleado")
+    private Integer idEmpleado;
+
     @ManyToOne
     private Empresa empresa;
     @Column (name = "createdAt")
@@ -31,10 +38,12 @@ public class MovimientoDinero implements Serializable{
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(Integer id, String concepto, Float monto, Empleado empleado, Empresa empresa, Date createdAt, Date updatedAt) {
+    public MovimientoDinero(Integer id, String concepto, Float monto, Integer idEmpresa, Integer idEmpleado, Empleado empleado, Empresa empresa, Date createdAt, Date updatedAt) {
         this.id = id;
         this.concepto = concepto;
         this.monto = monto;
+        this.idEmpleado = idEmpleado;
+        this.idEmpresa = idEmpresa;
         this.empleado = empleado;
         this.empresa = empresa;
         this.createdAt = createdAt;
@@ -63,6 +72,22 @@ public class MovimientoDinero implements Serializable{
 
     public void setMonto(Float monto) {
         this.monto = monto;
+    }
+
+    public Integer getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public Integer getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(Integer idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
     public Empleado getEmpleado() {

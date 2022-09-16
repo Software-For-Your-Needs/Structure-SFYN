@@ -28,6 +28,8 @@
   <br><table class="table table-dark table-striped">
   <tr>
     <th>ID</th>
+    <th>ID Empresa</th>
+    <th>ID Empleado</th>
     <th>Concepto</th>
     <th>Monto</th>
     <!--<th>Empleado</th>-->
@@ -43,6 +45,8 @@
 
   <br> <tr th:each="movimiento: ${movilist}">
   <td th:text="${movimiento.id}"></td>
+  <td th:text="${movimiento.idEmpresa}"></td>
+  <td th:text="${movimiento.idEmpleado}"></td>
   <td th:text="${movimiento.concepto}"></td>
   <td th:text="${movimiento.monto}"></td>
   <td th:text="${movimiento.createdAt}"></td>
@@ -50,8 +54,8 @@
 
   <!--boton para editar y eliminar las empresas-->
 
-  <td><button type="button" class="btn btn-warning"><a th:href="@{/EditarMovimiento/{id}(id=${movimiento.id})}">Editar</a></button></td>
-  <td><button type="button" class="btn btn-danger"><a th:href="@{/EliminarMovimiento/{id}(id=${movimiento.id})}">Eliminar</a></button></td>
+  <td><button type="button" class="btn btn-warning"><a th:href="@{/sfyn/editarmovimientodinero/{id}(id=${movimiento.id})}">Editar</a></button></td>
+  <td><button type="button" class="btn btn-danger"><a th:href="@{/sfyn/eliminarmovimientodinero/{id}(id=${movimiento.id})}">Eliminar</a></button></td>
 
 </tr>
 
