@@ -99,4 +99,16 @@ public class EmpleadoControlador {
         redirectAttributes.addFlashAttribute("mensaje", "updateError");
         return "redirect:/sfyn/editarempleado";
     }
+
+    @GetMapping("/eliminarempleado/{id}")
+    public String eliminarEmpleado(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        if (empleadoService.deleteEmpleado(id) == true) {
+            redirectAttributes.addFlashAttribute("mensaje", "deleteOK");
+            return "redirect:/sfyn/empleados";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/sfyn/empleados";
+    }
+
 }
+

@@ -136,6 +136,15 @@ public class EmpleadoService {
     public void eliminarEmpleado(int id) {
         this.empleadoRepository.deleteById(id);
     }
-    
+
+    public boolean deleteEmpleado(Integer id){
+        empleadoRepository.deleteById(id);  //Eliminar
+
+        if (empleadoRepository.findById(id)!=null){  //Verificacion del servicio eliminacion
+            return true;
+        }
+        return false;
+    }
+
 
 }
